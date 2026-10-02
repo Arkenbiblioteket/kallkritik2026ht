@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanningsdetektiven</title>
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+    margin:0;
+    height:100vh;
+    font-family:Segoe UI, Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url("bakgrund.jpg") no-repeat center center;
+    background-size:cover;
+}
+
+.container{
+    width:95%;
+    max-width:950px;
+    height:88vh;
+    background:rgba(255,255,255,0.96);
+    border-radius:28px;
+    padding:40px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+h1,h2,p{
+    text-align:center;
+}
+
+.header-img{
+    display:block;
+    margin:0 auto 20px;
+    max-width:650px;
+    width:100%;
+    border-radius:20px;
+}
+
+#question{
+    font-size:30px;
+    text-align:center;
+    margin:25px 0;
+}
+
+.question-number{
+    font-size:34px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.question-img{
+    max-width:640px;
+    width:100%;
+    display:block;
+    margin:0 auto 20px;
+    border-radius:18px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    border-radius:16px;
+    padding:16px 28px;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.true{background:#4CAF50;color:white;}
+.false{background:#f44336;color:white;}
+.blue{background:#2196F3;color:white;}
+
+#feedback{
+    text-align:center;
+    font-size:21px;
+    margin-top:25px;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.news-btn{
+    border:none;
+    background:white;
+    border-radius:12px;
+    padding:8px;
+    cursor:pointer;
+}
+
+.news-btn img{
+    width:100%;
+    height:65px;
+    object-fit:contain;
+}
+
+.center-page{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.spacer{
+    flex:1;
+}
+
+.quiz-img{
+    max-width:560px;
+    width:100%;
+    border-radius:24px;
+}
+
+.person-grid{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.person-grid img{
+    max-width:320px;
+    width:100%;
+    border-radius:22px;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+@media (max-width:700px){
+
+    #question{font-size:24px;}
+
+    button{
+        width:100%;
+        max-width:260px;
+        font-size:20px;
+    }
+
+    .news-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .person-grid{
+        flex-direction:column;
+    }
+
+    .question-number{
+        font-size:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="applauseSound" src="applaus.wav"></audio>
+<audio id="booSound" src="bu.wav"></audio>
+
+<div class="container" id="startScreen">
+
+    <img src="start.jpg" class="header-img">
+
+    <button class="blue" onclick="startGame()">Starta</button>
+
+</div>
+
+<div class="container" id="game" style="display:none;"></div>
+
+<script>
+
+const questions = [
+
+{
+q:"Google visar alltid den bästa informationen först i träfflistan.",
+img:"googlesok.jpg",
+a:"Falskt",
+explanation:"De översta träffarna är inte alltid bäst, för de kan vara reklam eller sådant som många klickar på, inte det som är mest sant. Därför är det bra att titta på flera resultat och välja källor som är pålitliga."
+},
+
+{
+q:"AI är så bra idag att den alltid har rätt.",
+img:"ai.jpg",
+a:"Falskt",
+explanation:"AI har inte alltid rätt eftersom den inte tänker själv. Den gissar svar utifrån det den har lärt sig från många texter. Ibland kan den ha lärt sig fel saker eller sakna viktig information."
+},
+
+{
+q:"Det jag delar på nätet går att ta tillbaka.",
+img:"ungdomar.jpg",
+a:"Falskt",
+explanation:"Det som delas på nätet kan spridas snabbt. Andra kan spara, ta skärmdump eller dela vidare."
+},
+
+{
+q:"Det är viktigt att jämföra flera källor innan man tror på en nyhet.",
+img:"nyheter.jpg",
+a:"Sant",
+explanation:"Om flera trovärdiga källor säger samma sak ökar chansen att det är sant.",
+newsLinks:true
+}
+
+];
+
+let current = 0;
+let score = 0;
+
+function startGame(){
+
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("game").style.display="flex";
+
+    document.getElementById("game").innerHTML = `
+
+    <div class="center-page">
+
+        <img src="luras.jpg" class="question-img">
+
+        <p style="font-size:28px; max-width:800px; line-height:1.5;">
+        Idag är det viktigt att tänka sig för när man surfar runt på internet.
+        Med AI och annan smart teknik är det lätt att bli lurad.
+        <br><br>
+        Nu ska du få några påståenden som du ska svara på om det är sant eller falskt.
+        </p>
+
+        <button class="blue" onclick="showQuestion()">Starta quiz</button>
+
+    </div>
+    `;
+}
+
+function showQuestion(){
+
+    let q = questions[current];
+
+    document.getElementById("game").innerHTML = `
+        <div id="question">
+
+            <div class="question-number">
+                Påstående ${current + 1}
+            </div>
+
+            <img src="${q.img}" class="question-img">
+
+            <div>${q.q}</div>
+
+        </div>
+
+        <div class="buttons">
+            <button class="true" onclick="answer('Sant')">Sant</button>
+            <button class="false" onclick="answer('Falskt')">Falskt</button>
+        </div>
+
+        <div id="feedback"></div>
+    `;
+}
+
+function answer(userAnswer){
+
+    let q = questions[current];
+
+    let correct = userAnswer === q.a;
+
+    if(correct){
+        score++;
+        document.getElementById("applauseSound").play();
+    }else{
+        document.getElementById("booSound").play();
+    }
+
+    document.querySelector(".buttons").style.display="none";
+
+    let result = correct
+    ? "<h2 style='color:#4CAF50;'>✅ RÄTT SVAR!</h2>"
+    : "<h2 style='color:#f44336;'>❌ FEL SVAR</h2>";
+
+    let reactionImg = correct
+    ? "glad.jpg"
+    : "oops.jpg";
+
+    let newsButtons = "";
+
+    if(q.newsLinks){
+        newsButtons = `
+        <h3>Kolla flera källor:</h3>
+        <div class="news-grid">
+            <button class="news-btn" onclick="window.open('https://www.svt.se','_blank')"><img src="svt.jpg"></button>
+            <button class="news-btn" onclick="window.open('https://www.sverigesradio.se','_blank')"><img src="sr.jpg"></button>
+            <button class="news-btn" onclick="window.open('https://www.dn.se','_blank')"><img src="dn.jpg"></button>
+            <button class="news-btn" onclick="window.open('https://www.bbc.com/news','_blank')"><img src="bbc.jpg"></button>
+            <button class="news-btn" onclick="window.open('https://www.google.se','_blank')"><img src="google.jpg"></button>
+        </div>
+        `;
+    }
+
+    document.getElementById("game").innerHTML = `
+
+    <div class="center-page">
+
+        <img src="${q.img}" class="question-img">
+
+        ${result}
+
+        <img src="${reactionImg}" style="max-width:180px; margin:15px auto; display:block;">
+
+        <p style="font-size:24px; max-width:800px;">
+            ${q.explanation}
+        </p>
+
+        ${newsButtons}
+
+        <br>
+
+        <button class="blue" onclick="nextQuestion()">Nästa fråga</button>
+
+    </div>
+    `;
+}
+
+function nextQuestion(){
+
+    current++;
+
+    if(current >= questions.length){
+        showResultPage();
+        return;
+    }
+
+    showQuestion();
+}
+
+function showResultPage(){
+
+    document.getElementById("game").innerHTML = `
+
+    <div class="center-page">
+
+        <h1>🎉 Klart!</h1>
+
+        <h2>${score} av ${questions.length} rätt</h2>
+
+        <p style="font-size:28px;">Bra jobbat!</p>
+
+        <div class="spacer"></div>
+
+        <button class="blue" onclick="showPersonPage()">Fortsätt</button>
+
+    </div>
+    `;
+}
+
+function showPersonPage(){
+
+    document.getElementById("game").innerHTML = `
+
+    <div class="center-page">
+
+        <h1>Vem är det här?</h1>
+
+        <div class="person-grid" id="personGrid">
+            <img src="ulfk2.jpg" onclick="showSecondImage()">
+        </div>
+
+        <br><br>
+
+        <button class="blue" onclick="showQuizPage()">Fortsätt</button>
+
+    </div>
+    `;
+}
+
+function showSecondImage(){
+
+    const grid = document.getElementById("personGrid");
+
+    if(!document.getElementById("img2")){
+        grid.innerHTML += `<img src="ulfk1.jpg" id="img2">`;
+    }
+}
+
+function showQuizPage(){
+
+    document.getElementById("game").innerHTML = `
+
+    <div class="center-page">
+
+        <p style="font-size:28px; margin-bottom:25px;">
+            Kan du se skillnad på AI och på riktigt?
+            <br><br>
+            Nu testar vi ett quiz från SVT!
+        </p>
+
+        <a href="https://www.svt.se/special/kan-du-skilja-pa-en-ai-video-och-en-riktig/" target="_blank">
+            <img src="quiz1.jpg" class="quiz-img">
+        </a>
+
+    </div>
+    `;
+}
+
+</script>
+
+</body>
+</html>
