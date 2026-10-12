@@ -3,171 +3,466 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sanningsdetektiven</title>
 
 <style>
-*{box-sizing:border-box;}
+* {
+    box-sizing: border-box;
+}
 
-body{
-    margin:0;
-    height:100vh;
-    font-family:Segoe UI, Arial, sans-serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+:root {
+    --blue: #276a9b;
+    --blue-dark: #174c75;
+    --green: #27834a;
+    --red: #c93636;
+    --text: #18334a;
+    --light-blue: #f2f7fb;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+
+    /* Bakgrundsbild och mörk toning är kvar */
     background:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url("bakgrund.jpg") no-repeat center center;
-    background-size:cover;
+        linear-gradient(
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.35)
+        ),
+        url("bakgrund.jpg") no-repeat center center fixed;
+
+    background-size: cover;
+    color: var(--text);
 }
 
-.container{
-    width:95%;
-    max-width:950px;
-    height:88vh;
-    background:rgba(255,255,255,0.96);
-    border-radius:28px;
-    padding:40px;
-    overflow-y:auto;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.container {
+    width: 100%;
+    max-width: 1050px;
+    height: 92vh;
+    min-height: 500px;
+    background: rgba(255,255,255,0.97);
+    border-radius: 28px;
+    padding: 32px;
+    overflow-y: auto;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
 }
 
-h1,h2,p{
-    text-align:center;
+h1, h2, h3, p {
+    text-align: center;
 }
 
-.header-img{
-    display:block;
-    margin:0 auto 20px;
-    max-width:650px;
-    width:100%;
-    border-radius:20px;
+h1 {
+    font-size: 36px;
 }
 
-#question{
-    font-size:30px;
-    text-align:center;
-    margin:25px 0;
+h2 {
+    font-size: 30px;
 }
 
-.question-number{
-    font-size:34px;
-    font-weight:bold;
-    margin-bottom:20px;
+p {
+    line-height: 1.6;
 }
 
-.question-img{
-    max-width:640px;
-    width:100%;
-    display:block;
-    margin:0 auto 20px;
-    border-radius:18px;
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 15px 24px;
+    transition: transform 0.15s, background 0.15s;
 }
 
-.buttons{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
+button:hover {
+    transform: translateY(-2px);
 }
 
-button{
-    border:none;
-    border-radius:16px;
-    padding:16px 28px;
-    font-size:22px;
-    cursor:pointer;
+button:focus-visible,
+a:focus-visible {
+    outline: 4px solid #f0a500;
+    outline-offset: 4px;
 }
 
-.true{background:#4CAF50;color:white;}
-.false{background:#f44336;color:white;}
-.blue{background:#2196F3;color:white;}
-
-#feedback{
-    text-align:center;
-    font-size:21px;
-    margin-top:25px;
+button:disabled {
+    cursor: default;
+    opacity: 0.8;
+    transform: none;
 }
 
-.news-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:12px;
-    margin-top:20px;
+.blue {
+    background: var(--blue);
+    color: white;
 }
 
-.news-btn{
-    border:none;
-    background:white;
-    border-radius:12px;
-    padding:8px;
-    cursor:pointer;
+.blue:hover {
+    background: var(--blue-dark);
 }
 
-.news-btn img{
-    width:100%;
-    height:65px;
-    object-fit:contain;
+.green {
+    background: var(--green);
+    color: white;
 }
 
-.center-page{
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+.red {
+    background: var(--red);
+    color: white;
 }
 
-.spacer{
-    flex:1;
+.header-img {
+    display: block;
+    margin: auto auto 25px;
+    max-width: 650px;
+    width: 100%;
+    max-height: 55vh;
+    object-fit: contain;
+    border-radius: 20px;
 }
 
-.quiz-img{
-    max-width:560px;
-    width:100%;
-    border-radius:24px;
+.question-img {
+    display: block;
+    max-width: 640px;
+    max-height: 34vh;
+    width: 100%;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 18px;
 }
 
-.person-grid{
-    display:flex;
-    gap:25px;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    margin-top:25px;
+.quiz-img {
+    display: block;
+    max-width: 560px;
+    max-height: 48vh;
+    width: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 24px;
 }
 
-.person-grid img{
-    max-width:320px;
-    width:100%;
-    border-radius:22px;
-    cursor:pointer;
-    box-shadow:0 8px 18px rgba(0,0,0,0.18);
+.center-page {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
 }
 
-@media (max-width:700px){
+.intro-text {
+    max-width: 800px;
+    font-size: 25px;
+    margin: 5px auto 15px;
+}
 
-    #question{font-size:24px;}
+.question-number {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 12px;
+}
 
-    button{
-        width:100%;
-        max-width:260px;
-        font-size:20px;
+#question {
+    text-align: center;
+}
+
+.question-text {
+    font-size: 29px;
+    font-weight: 650;
+    line-height: 1.4;
+    margin: 18px auto 25px;
+    max-width: 850px;
+}
+
+.progress-wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 22px;
+}
+
+.progress-label {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.progress-track {
+    height: 12px;
+    background: #dce5ec;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 20px;
+    transition: width 0.25s;
+}
+
+/* Fyra svarsalternativ */
+
+.answer-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    max-width: 850px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.answer-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-height: 105px;
+    padding: 18px;
+    border: 3px solid #b7c9d9;
+    border-radius: 17px;
+    background: var(--light-blue);
+    color: var(--text);
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.answer-btn:hover {
+    background: #dcecf8;
+    border-color: var(--blue);
+}
+
+.answer-btn:disabled {
+    opacity: 1;
+}
+
+.answer-letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.answer-btn.correct-choice {
+    border-color: var(--green);
+    background: #e0f4e6;
+}
+
+.answer-btn.correct-choice .answer-letter {
+    background: var(--green);
+}
+
+.answer-btn.wrong-choice {
+    border-color: var(--red);
+    background: #fde6e6;
+}
+
+.answer-btn.wrong-choice .answer-letter {
+    background: var(--red);
+}
+
+.feedback {
+    max-width: 820px;
+    width: 100%;
+    margin: 25px auto 0;
+    text-align: center;
+}
+
+.feedback-title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.feedback-explanation {
+    font-size: 22px;
+    line-height: 1.6;
+    margin: 15px auto;
+}
+
+.reaction-img {
+    display: block;
+    max-width: 180px;
+    max-height: 150px;
+    object-fit: contain;
+    margin: 10px auto;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 700px;
+    width: 100%;
+    margin: 15px auto;
+}
+
+.news-btn {
+    background: white;
+    border: 2px solid #d6e0e8;
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 0;
+}
+
+.news-btn:hover {
+    border-color: var(--blue);
+    background: #f2f7fb;
+}
+
+.news-btn img {
+    width: 100%;
+    height: 65px;
+    object-fit: contain;
+}
+
+.action-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 20px auto 5px;
+}
+
+.spacer {
+    flex: 1;
+    min-height: 15px;
+}
+
+.person-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    width: 100%;
+}
+
+.person-grid img {
+    display: block;
+    max-width: 320px;
+    max-height: 40vh;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+.person-grid img:hover {
+    transform: scale(1.02);
+}
+
+.small-note {
+    font-size: 16px;
+    color: #536879;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 8px;
     }
 
-    .news-grid{
-        grid-template-columns:repeat(2,1fr);
+    .container {
+        height: 96vh;
+        min-height: 0;
+        padding: 20px 15px;
+        border-radius: 20px;
     }
 
-    .person-grid{
-        flex-direction:column;
+    h1 {
+        font-size: 29px;
     }
 
-    .question-number{
-        font-size:28px;
+    h2 {
+        font-size: 25px;
+    }
+
+    .intro-text {
+        font-size: 21px;
+    }
+
+    .question-text {
+        font-size: 24px;
+    }
+
+    .question-number {
+        font-size: 24px;
+    }
+
+    .answer-options {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .answer-btn {
+        min-height: 78px;
+        padding: 13px;
+        font-size: 18px;
+    }
+
+    .answer-letter {
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
+    }
+
+    .feedback-explanation {
+        font-size: 19px;
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .news-btn img {
+        height: 55px;
+    }
+
+    .person-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .person-grid img {
+        max-width: 250px;
+        max-height: 28vh;
+    }
+
+    button {
+        font-size: 18px;
+    }
+
+    .header-img {
+        max-height: 45vh;
+    }
+
+    .question-img {
+        max-height: 27vh;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
     }
 }
 </style>
@@ -175,174 +470,400 @@ button{
 
 <body>
 
-<audio id="applauseSound" src="applaus.wav"></audio>
-<audio id="booSound" src="bu.wav"></audio>
+<audio id="applauseSound" src="applaus.wav" preload="auto"></audio>
+<audio id="booSound" src="bu.wav" preload="auto"></audio>
+
+<!-- Startsida -->
 
 <div class="container" id="startScreen">
+    <div class="center-page">
+        <img src="start.jpg" class="header-img" alt="Sanningsdetektiven">
 
-    <img src="start.jpg" class="header-img">
-
-    <button class="blue" onclick="startGame()">Starta</button>
-
+        <button class="blue" onclick="startGame()">
+            Starta
+        </button>
+    </div>
 </div>
+
+<!-- Här visas quizets olika sidor -->
 
 <div class="container" id="game" style="display:none;"></div>
 
 <script>
+"use strict";
+
+/* ==================================================
+   FRÅGOR
+
+   options innehåller alltid fyra svar.
+   correct är rätt svar: 0=A, 1=B, 2=C, 3=D.
+   ================================================== */
 
 const questions = [
 
-{
-q:"Google visar alltid den bästa informationen först i träfflistan.",
-img:"googlesok.jpg",
-a:"Falskt",
-explanation:"De översta träffarna är inte alltid bäst, för de kan vara reklam eller sådant som många klickar på, inte det som är mest sant. Därför är det bra att titta på flera resultat och välja källor som är pålitliga."
-},
+    {
+        q: "Google visar alltid den bästa informationen först i träfflistan.",
+        img: "googlesok.jpg",
 
-{
-q:"AI är så bra idag att den alltid har rätt.",
-img:"ai.jpg",
-a:"Falskt",
-explanation:"AI har inte alltid rätt eftersom den inte tänker själv. Den gissar svar utifrån det den har lärt sig från många texter. Ibland kan den ha lärt sig fel saker, ha fördomar, eller sakna viktig information."
-},
+        options: [
+            "Ja, Google kontrollerar att allt är sant.",
+            "Ja, de översta träffarna är alltid bäst.",
+            "Nej, de översta träffarna kan vara reklam eller populära sidor.",
+            "Nej, Google visar bara gamla webbsidor."
+        ],
 
-{
-q:"Det jag delar på nätet går att ta tillbaka.",
-img:"ungdomar.jpg",
-a:"Falskt",
-explanation:"Det som delas på nätet kan spridas snabbt. Andra <br>kan spara, ta skärmdump eller dela vidare."
-},
+        correct: 2,
 
-{
-q:"Det är viktigt att jämföra flera källor innan man tror på en nyhet.",
-img:"nyheter.jpg",
-a:"Sant",
-explanation:"Om flera trovärdiga källor säger samma sak ökar chansen att det är sant.",
-newsLinks:true
-}
+        explanation:
+            "De första träffarna är inte alltid de bästa. Vissa är annonser och andra kan ligga högt för att de är populära. Titta på vem som står bakom sidan och jämför gärna flera källor."
+    },
+
+    {
+        q: "AI är så bra i dag att den alltid har rätt.",
+        img: "ai.jpg",
+
+        options: [
+            "Ja, AI gör aldrig några misstag.",
+            "Ja, om AI kommer från ett stort företag.",
+            "Nej, AI kan ge felaktiga svar och hitta på information.",
+            "Nej, AI kan bara svara på engelska."
+        ],
+
+        correct: 2,
+
+        explanation:
+            "AI kan låta säker även när svaret är fel. Den kan missa viktig information eller hitta på uppgifter. Kontrollera därför viktiga fakta med tillförlitliga källor."
+    },
+
+    {
+        q: "Det jag delar på nätet går alltid att ta tillbaka.",
+        img: "ungdomar.jpg",
+
+        options: [
+            "Ja, om jag tar bort inlägget direkt.",
+            "Ja, efter en vecka försvinner allt.",
+            "Nej, men bara bilder kan sparas.",
+            "Nej, andra kan ha sparat, skärmdumpat eller delat det vidare."
+        ],
+
+        correct: 3,
+
+        explanation:
+            "Det som delas på nätet kan spridas snabbt. Andra kan spara material, ta skärmdumpar eller skicka det vidare. Tänk därför efter innan du publicerar något."
+    },
+
+    {
+        q: "Vad är smartast att göra innan du tror på en nyhet?",
+        img: "nyheter.jpg",
+
+        options: [
+            "Dela den direkt så att fler får veta.",
+            "Kontrollera om flera trovärdiga källor rapporterar samma sak.",
+            "Lita på den om den har många gilla-markeringar.",
+            "Tro på den om en kompis har skickat den."
+        ],
+
+        correct: 1,
+
+        newsLinks: true,
+
+        explanation:
+            "Jämför uppgifterna med flera trovärdiga källor. Titta på vem som publicerat nyheten och om det finns belägg för det som påstås. Många delningar betyder inte automatiskt att något är sant."
+    },
+
+    {
+        q: "Du säljer en jacka på Vinted. Köparen skriver: ”Oj, jag råkade betala för mycket! Kan du swisha tillbaka 100 kronor?” Vad gör du?",
+        img: "ungdomar.jpg",
+
+        options: [
+            "Swishar tillbaka direkt. Köparen verkar ju ärlig.",
+            "Ber köparen skicka en skärmdump och litar på den.",
+            "Swishar tillbaka en del av pengarna för säkerhets skull.",
+            "Öppnar själv Swish och kontrollerar att betalningen verkligen kommit in."
+        ],
+
+        correct: 3,
+
+        explanation:
+            "Kontrollera själv i Swish att betalningen verkligen har kommit in och vilket belopp du har fått. En skärmdump kan vara manipulerad. Skicka inte tillbaka pengar enbart för att någon ber dig."
+    }
 
 ];
 
 let current = 0;
 let score = 0;
+let answered = false;
 
-function startGame(){
+const game = document.getElementById("game");
 
-    document.getElementById("startScreen").style.display="none";
-    document.getElementById("game").style.display="flex";
+/* ==================================================
+   LJUD
+   ================================================== */
 
-    document.getElementById("game").innerHTML = `
+function playSound(id) {
+    const sound = document.getElementById(id);
 
-    <div class="center-page">
+    if (!sound) return;
 
-        <img src="luras.jpg" class="question-img">
+    sound.currentTime = 0;
 
-        <p style="font-size:28px; max-width:800px; line-height:1.5;">
-        Det är viktigt att tänka sig för när man surfar runt på internet.
-        Med AI och annan smart teknik är det lätt att bli lurad.
-        <br><br>
-        Nu ska du få några påståenden som du<br> ska svara på om det är sant eller falskt.
-        </p>
+    const playback = sound.play();
 
-        <button class="blue" onclick="showQuestion()">Starta quiz</button>
+    if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {
+            // Quizet fungerar även om ljud inte kan spelas.
+        });
+    }
+}
 
-    </div>
+/* ==================================================
+   START
+   ================================================== */
+
+function startGame() {
+    current = 0;
+    score = 0;
+    answered = false;
+
+    document.getElementById("startScreen").style.display = "none";
+    game.style.display = "flex";
+
+    showIntroduction();
+}
+
+/* ==================================================
+   INTRODUKTION
+   ================================================== */
+
+function showIntroduction() {
+    game.innerHTML = `
+        <div class="center-page">
+
+            <img src="luras.jpg"
+                 class="question-img"
+                 alt="Tänk efter innan du litar på information på nätet">
+
+            <p class="intro-text">
+                Det är viktigt att tänka sig för när man surfar på
+                internet. Med AI och annan smart teknik är det lätt
+                att bli lurad.
+                <br><br>
+                Nu ska du få testa dina kunskaper om källkritik
+                och säkerhet på nätet.
+            </p>
+
+            <button class="blue" onclick="showQuestion()">
+                Starta quiz
+            </button>
+
+        </div>
     `;
 }
 
-function showQuestion(){
+/* ==================================================
+   VISA FRÅGA OCH FYRA SVARSALTERNATIV
+   ================================================== */
 
-    let q = questions[current];
+function showQuestion() {
+    answered = false;
 
-    document.getElementById("game").innerHTML = `
+    const q = questions[current];
+    const letters = ["A", "B", "C", "D"];
+
+    const progress = ((current + 1) / questions.length) * 100;
+
+    const optionsHtml = q.options.map((option, index) => `
+        <button
+            type="button"
+            class="answer-btn"
+            data-answer="${index}"
+            onclick="answer(${index})">
+
+            <span class="answer-letter">${letters[index]}</span>
+            <span>${option}</span>
+
+        </button>
+    `).join("");
+
+    game.innerHTML = `
+        <div class="progress-wrap">
+
+            <div class="progress-label">
+                Fråga ${current + 1} av ${questions.length}
+            </div>
+
+            <div class="progress-track"
+                 role="progressbar"
+                 aria-valuenow="${current + 1}"
+                 aria-valuemin="1"
+                 aria-valuemax="${questions.length}">
+
+                <div class="progress-fill"
+                     style="width:${progress}%"></div>
+
+            </div>
+        </div>
+
         <div id="question">
 
             <div class="question-number">
-                Påstående ${current + 1}
+                Sanningsdetektiven
             </div>
 
-            <img src="${q.img}" class="question-img">
+            <img
+                src="${q.img}"
+                class="question-img"
+                alt="Bild till fråga ${current + 1}">
 
-            <div>${q.q}</div>
+            <div class="question-text">${q.q}</div>
 
         </div>
 
-        <div class="buttons">
-            <button class="true" onclick="answer('Sant')">Sant</button>
-            <button class="false" onclick="answer('Falskt')">Falskt</button>
+        <div class="answer-options">
+            ${optionsHtml}
         </div>
 
-        <div id="feedback"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
     `;
+
+    game.scrollTop = 0;
 }
 
-function answer(userAnswer){
+/* ==================================================
+   RÄTTA SVAR
+   ================================================== */
 
-    let q = questions[current];
+function answer(selected) {
+    if (answered) return;
 
-    let correct = userAnswer === q.a;
+    answered = true;
 
-    if(correct){
+    const q = questions[current];
+    const correct = selected === q.correct;
+    const buttons = game.querySelectorAll(".answer-btn");
+
+    buttons.forEach((button, index) => {
+        button.disabled = true;
+
+        if (index === q.correct) {
+            button.classList.add("correct-choice");
+        }
+
+        if (index === selected && !correct) {
+            button.classList.add("wrong-choice");
+        }
+    });
+
+    if (correct) {
         score++;
-        document.getElementById("applauseSound").play();
-    }else{
-        document.getElementById("booSound").play();
+        playSound("applauseSound");
+    } else {
+        playSound("booSound");
     }
 
-    document.querySelector(".buttons").style.display="none";
+    const resultTitle = correct
+        ? `<div class="feedback-title" style="color:#27834a;">
+               ✓ RÄTT SVAR!
+           </div>`
+        : `<div class="feedback-title" style="color:#c93636;">
+               ✗ FEL SVAR
+           </div>`;
 
-    let result = correct
-    ? "<h2 style='color:#4CAF50;'>✅ RÄTT SVAR!</h2>"
-    : "<h2 style='color:#f44336;'>❌ FEL SVAR</h2>";
-
-    let reactionImg = correct
-    ? "glad.jpg"
-    : "oops.jpg";
+    const reactionImg = correct ? "glad.jpg" : "oops.jpg";
 
     let newsButtons = "";
 
-    if(q.newsLinks){
+    if (q.newsLinks) {
         newsButtons = `
-        <h3>Kolla flera källor:</h3>
-        <div class="news-grid">
-            <button class="news-btn" onclick="window.open('https://www.svt.se','_blank')"><img src="svt.jpg"></button>
-            <button class="news-btn" onclick="window.open('https://www.sverigesradio.se','_blank')"><img src="sr.jpg"></button>
-            <button class="news-btn" onclick="window.open('https://www.dn.se','_blank')"><img src="dn.jpg"></button>
-            <button class="news-btn" onclick="window.open('https://www.bbc.com/news','_blank')"><img src="bbc.jpg"></button>
-            <button class="news-btn" onclick="window.open('https://www.google.se','_blank')"><img src="google.jpg"></button>
-        </div>
+            <h3>Jämför nyheten med andra källor</h3>
+
+            <p class="small-note">
+                Klicka på en logotyp för att öppna webbplatsen.
+            </p>
+
+            <div class="news-grid">
+
+                <button class="news-btn"
+                        onclick="openNews('https://www.svt.se')"
+                        aria-label="Öppna SVT">
+                    <img src="svt.jpg" alt="SVT">
+                </button>
+
+                <button class="news-btn"
+                        onclick="openNews('https://www.sverigesradio.se')"
+                        aria-label="Öppna Sveriges Radio">
+                    <img src="sr.jpg" alt="Sveriges Radio">
+                </button>
+
+                <button class="news-btn"
+                        onclick="openNews('https://www.dn.se')"
+                        aria-label="Öppna Dagens Nyheter">
+                    <img src="dn.jpg" alt="Dagens Nyheter">
+                </button>
+
+                <button class="news-btn"
+                        onclick="openNews('https://www.bbc.com/news')"
+                        aria-label="Öppna BBC News">
+                    <img src="bbc.jpg" alt="BBC News">
+                </button>
+
+                <button class="news-btn"
+                        onclick="openNews('https://www.google.se')"
+                        aria-label="Öppna Google">
+                    <img src="google.jpg" alt="Google">
+                </button>
+
+            </div>
         `;
     }
 
-    document.getElementById("game").innerHTML = `
+    const feedback = document.getElementById("feedback");
 
-    <div class="center-page">
+    feedback.innerHTML = `
+        ${resultTitle}
 
-        <img src="${q.img}" class="question-img">
+        <img
+            src="${reactionImg}"
+            class="reaction-img"
+            alt="${correct ? "Glad reaktion" : "Oj, fel svar"}">
 
-        ${result}
-
-        <img src="${reactionImg}" style="max-width:180px; margin:15px auto; display:block;">
-
-        <p style="font-size:24px; max-width:800px;">
+        <p class="feedback-explanation">
             ${q.explanation}
         </p>
 
         ${newsButtons}
 
-        <br>
-
-        <button class="blue" onclick="nextQuestion()">Nästa fråga</button>
-
-    </div>
+        <div class="action-row">
+            <button class="blue" onclick="nextQuestion()">
+                ${current === questions.length - 1
+                    ? "Se resultatet"
+                    : "Nästa fråga"}
+            </button>
+        </div>
     `;
+
+    feedback.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
 }
 
-function nextQuestion(){
+/* ==================================================
+   ÖPPNA NYHETSKÄLLOR
+   ================================================== */
 
+function openNews(url) {
+    window.open(url, "_blank", "noopener,noreferrer");
+}
+
+/* ==================================================
+   NÄSTA FRÅGA
+   ================================================== */
+
+function nextQuestion() {
     current++;
 
-    if(current >= questions.length){
+    if (current >= questions.length) {
         showResultPage();
         return;
     }
@@ -350,75 +871,144 @@ function nextQuestion(){
     showQuestion();
 }
 
-function showResultPage(){
+/* ==================================================
+   RESULTAT
+   ================================================== */
 
-    document.getElementById("game").innerHTML = `
+function showResultPage() {
+    game.innerHTML = `
+        <div class="center-page">
 
-    <div class="center-page">
+            <h1>🎉 Klart!</h1>
 
-        <h1>🎉 Klart!</h1>
+            <h2>${score} av ${questions.length} rätt</h2>
 
-        <h2>${score} av ${questions.length} rätt</h2>
+            <img
+                src="${score >= 3 ? "glad.jpg" : "oops.jpg"}"
+                class="reaction-img"
+                alt="Din quizreaktion">
 
-        <p style="font-size:28px;">Bra jobbat!</p>
+            <p class="intro-text">
+                ${score === questions.length
+                    ? "Fantastiskt! Du fick alla rätt!"
+                    : score >= 3
+                    ? "Bra jobbat! Du har koll på mycket."
+                    : "Bra kämpat! Nu har du lärt dig några nya saker."}
+            </p>
 
-        <div class="spacer"></div>
+            <div class="action-row">
+                <button class="blue" onclick="restartQuiz()">
+                    Spela igen
+                </button>
 
-        <button class="blue" onclick="showPersonPage()">Fortsätt</button>
+                <button class="green" onclick="showPersonPage()">
+                    Fortsätt
+                </button>
+            </div>
 
-    </div>
-    `;
-}
-
-function showPersonPage(){
-
-    document.getElementById("game").innerHTML = `
-
-    <div class="center-page">
-
-        <h1>Vem är det här?</h1>
-
-        <div class="person-grid" id="personGrid">
-            <img src="ulfk2.jpg" onclick="showSecondImage()">
         </div>
-
-        <br><br>
-
-        <button class="blue" onclick="showQuizPage()">Fortsätt</button>
-
-    </div>
     `;
 }
 
-function showSecondImage(){
+function restartQuiz() {
+    current = 0;
+    score = 0;
+    answered = false;
+    showQuestion();
+}
 
+/* ==================================================
+   BILDER PÅ ULF
+   ================================================== */
+
+function showPersonPage() {
+    game.innerHTML = `
+        <div class="center-page">
+
+            <h1>Vem är det här?</h1>
+
+            <p class="intro-text">
+                Titta på bilden. Klicka på den för att visa
+                ytterligare en bild.
+            </p>
+
+            <div class="person-grid" id="personGrid">
+
+                <img
+                    src="ulfk2.jpg"
+                    alt="Första bilden"
+                    onclick="showSecondImage()"
+                    title="Klicka för att visa nästa bild">
+
+            </div>
+
+            <p class="small-note">
+                Kan du se vad som skiljer bilderna åt?
+            </p>
+
+            <button class="blue" onclick="showQuizPage()">
+                Fortsätt
+            </button>
+
+        </div>
+    `;
+}
+
+function showSecondImage() {
     const grid = document.getElementById("personGrid");
 
-    if(!document.getElementById("img2")){
-        grid.innerHTML += `<img src="ulfk1.jpg" id="img2">`;
+    if (!grid || document.getElementById("img2")) {
+        return;
     }
+
+    const image = document.createElement("img");
+
+    image.src = "ulfk1.jpg";
+    image.id = "img2";
+    image.alt = "Den andra bilden";
+
+    grid.appendChild(image);
 }
 
-function showQuizPage(){
+/* ==================================================
+   SVT:S AI-QUIZ
+   ================================================== */
 
-    document.getElementById("game").innerHTML = `
+function showQuizPage() {
+    game.innerHTML = `
+        <div class="center-page">
 
-    <div class="center-page">
+            <h1>AI eller på riktigt?</h1>
 
-        <p style="font-size:28px; margin-bottom:25px;">
-            Kan du se skillnad på AI och på riktigt?
-            <br><br>
-            Nu testar vi ett quiz från SVT!
-        </p>
+            <p class="intro-text">
+                Kan du se skillnad på en AI-video och en riktig?
+                <br><br>
+                Testa ditt öga i SVT:s quiz!
+            </p>
 
-        <a href="https://www.svt.se/special/kan-du-skilja-pa-en-ai-video-och-en-riktig/" target="_blank">
-            <img src="quiz1.jpg" class="quiz-img">
-        </a>
+            <a
+                href="https://www.svt.se/special/kan-du-skilja-pa-en-ai-video-och-en-riktig/"
+                target="_blank"
+                rel="noopener noreferrer">
 
-    </div>
+                <img
+                    src="quiz1.jpg"
+                    class="quiz-img"
+                    alt="Öppna SVT:s quiz om AI och verkliga videor">
+
+            </a>
+
+            <p class="small-note">
+                Klicka på bilden för att öppna quizet.
+            </p>
+
+            <button class="blue" onclick="showPersonPage()">
+                Tillbaka
+            </button>
+
+        </div>
     `;
 }
-
 </script>
 
 </body>
