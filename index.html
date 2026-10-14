@@ -221,7 +221,7 @@ button {
     animation: fadeIn 0.35s ease-out;
 }
 
-/* Den tydliga förklaringsrutan visas efter varje svar. */
+/* Förklaringsrutan som visas efter varje svar. */
 
 .feedback-explanation {
     white-space: pre-line;
@@ -247,6 +247,28 @@ button {
     font-size: 1.15rem;
     font-weight: 800;
     margin-bottom: 8px;
+}
+
+/* Blå rubrik för reflektionsfrågorna. */
+
+.reflection-heading {
+    display: block;
+    color: #176a9b;
+    font-size: 1.08rem;
+    font-weight: 800;
+    margin-top: 18px;
+    margin-bottom: 6px;
+}
+
+/* Punktlista med reflektionsfrågor. */
+
+.reflection-list {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.reflection-list li {
+    margin-bottom: 5px;
 }
 
 .feedback-result {
@@ -860,18 +882,45 @@ function answer(selectedIndex) {
 
     feedbackImage.style.display = "block";
 
-    // Den synliga rutan med förklaringen.
+    // Skapa förklaringsrutan.
     explanation.innerHTML = "";
 
     const heading = document.createElement("span");
     heading.className = "feedback-heading";
     heading.textContent = "💡 Så här ligger det till!";
 
-    const explanationText = document.createElement("div");
-    explanationText.textContent = q.explanation;
-
     explanation.appendChild(heading);
+
+    // Dela upp förklaringen och reflektionsfrågorna.
+    const parts = q.explanation.split(/Fundera vidare på:/i);
+
+    const explanationText = document.createElement("div");
+    explanationText.textContent = parts[0].trim();
     explanation.appendChild(explanationText);
+
+    // Visa blå rubrik och punktlista om frågan har reflektionsfrågor.
+    if (parts.length > 1) {
+        const reflectionHeading = document.createElement("span");
+        reflectionHeading.className = "reflection-heading";
+        reflectionHeading.textContent = "Fundera vidare på:";
+        explanation.appendChild(reflectionHeading);
+
+        const reflectionList = document.createElement("ul");
+        reflectionList.className = "reflection-list";
+
+        const reflectionQuestions = parts[1]
+            .split("\n")
+            .map(line => line.trim())
+            .filter(line => line.length > 0);
+
+        reflectionQuestions.forEach(question => {
+            const item = document.createElement("li");
+            item.textContent = question;
+            reflectionList.appendChild(item);
+        });
+
+        explanation.appendChild(reflectionList);
+    }
 
     const extraLinks = document.getElementById("extraLinks");
     extraLinks.innerHTML = "";
