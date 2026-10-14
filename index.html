@@ -7,9 +7,7 @@
 <title>Tänk ett varv till</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -71,9 +69,7 @@ p {
     border-radius: 12px;
 }
 
-button {
-    font-family: inherit;
-}
+button { font-family: inherit; }
 
 .main-button,
 .next-button,
@@ -188,9 +184,7 @@ button {
     font-weight: 800;
 }
 
-.answer-button:disabled {
-    cursor: default;
-}
+.answer-button:disabled { cursor: default; }
 
 .answer-button.correct {
     background: #d9f5e5;
@@ -198,9 +192,7 @@ button {
     color: #164d30;
 }
 
-.answer-button.correct .answer-letter {
-    background: #258653;
-}
+.answer-button.correct .answer-letter { background: #258653; }
 
 .answer-button.incorrect {
     background: #fde3e3;
@@ -208,20 +200,14 @@ button {
     color: #762626;
 }
 
-.answer-button.incorrect .answer-letter {
-    background: #c74747;
-}
+.answer-button.incorrect .answer-letter { background: #c74747; }
 
-.answer-button.muted {
-    opacity: 0.65;
-}
+.answer-button.muted { opacity: 0.65; }
 
 .feedback {
     margin-top: 22px;
     animation: fadeIn 0.35s ease-out;
 }
-
-/* Förklaringsrutan som visas efter varje svar. */
 
 .feedback-explanation {
     white-space: pre-line;
@@ -249,8 +235,6 @@ button {
     margin-bottom: 8px;
 }
 
-/* Blå rubrik för reflektionsfrågorna. */
-
 .reflection-heading {
     display: block;
     color: #176a9b;
@@ -260,16 +244,12 @@ button {
     margin-bottom: 6px;
 }
 
-/* Punktlista med reflektionsfrågor. */
-
 .reflection-list {
     margin: 0;
     padding-left: 25px;
 }
 
-.reflection-list li {
-    margin-bottom: 5px;
-}
+.reflection-list li { margin-bottom: 5px; }
 
 .feedback-result {
     font-size: 1.3rem;
@@ -277,13 +257,8 @@ button {
     margin: 10px 0;
 }
 
-.feedback-result.correct-text {
-    color: #187344;
-}
-
-.feedback-result.incorrect-text {
-    color: #b02c2c;
-}
+.feedback-result.correct-text { color: #187344; }
+.feedback-result.incorrect-text { color: #b02c2c; }
 
 .feedback-image {
     display: block;
@@ -322,9 +297,7 @@ button {
     font-weight: 700;
 }
 
-.news-link:hover {
-    background: #e0eff8;
-}
+.news-link:hover { background: #e0eff8; }
 
 .news-link img {
     max-width: 100px;
@@ -337,9 +310,7 @@ button {
     font-size: 0.95rem;
 }
 
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
 .result-score {
     font-size: 2rem;
@@ -356,25 +327,13 @@ button {
 }
 
 @keyframes popIn {
-    from {
-        opacity: 0;
-        transform: scale(0.96);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 620px) {
@@ -414,12 +373,11 @@ button {
 </head>
 
 <body>
-
 <div class="container">
 
     <section id="startScreen">
         <h1>🕵️ Tänk ett varv till</h1>
-        <p> <h2>Ett spel om källkritik, AI och bluffar på nätet.</h2></p>
+        <h2>Ett spel om källkritik, AI och bluffar på nätet.</h2>
         <img class="screen-image" src="start.jpg" alt="Sanningsdetektiven">
         <button class="main-button" onclick="showIntroduction()">Starta spelet</button>
     </section>
@@ -435,16 +393,12 @@ button {
 
     <section id="gameScreen" class="hidden">
         <h1>🕵️ Tänk ett varv till</h1>
-
         <div class="progress">
             <div id="progressFill" class="progress-fill"></div>
         </div>
-
         <div id="progressText" class="progress-text"></div>
         <div id="scoreText" class="score-line"></div>
-
         <img id="questionImage" class="question-image" src="luras.jpg" alt="Bild till frågan">
-
         <div id="questionText" class="question-text"></div>
         <div id="answerOptions" class="answer-options"></div>
 
@@ -462,21 +416,19 @@ button {
         <img class="screen-image" src="glad.jpg" alt="Bra jobbat">
         <div id="resultScore" class="result-score"></div>
         <div id="resultMessage" class="result-panel"></div>
-
         <h2>Vill du fortsätta träna?</h2>
         <p>Här kan du testa fler saker och fundera vidare över vad som är sant på nätet.</p>
-
-        <button class="main-button" onclick="showPersonPage()">Titta på Ulf-bilderna</button>
+        <button class="main-button" onclick="showPersonPage()">Titta på Ulf- och kungabilderna</button>
         <button class="secondary-button" onclick="showQuizPage()">Testa SVT:s AI-quiz</button>
         <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
     </section>
 
     <section id="personScreen" class="hidden">
         <h1>Vad ser du?</h1>
-        <p>Titta noga på bilden. Kan du upptäcka detaljer som hjälper dig att avgöra vad du ser?</p>
+        <p>Titta noga på bilderna. Kan du upptäcka detaljer som hjälper dig att avgöra vad du ser?</p>
 
         <img id="personImage" class="screen-image" src="ulfk2.jpg" alt="Bild på Ulf">
-        <p id="personCaption">Bild 1</p>
+        <p id="personCaption">Ulf – bild 1</p>
 
         <button class="main-button" onclick="showSecondImage()">Visa nästa bild</button>
         <button class="secondary-button" onclick="showResultPage()">Tillbaka till resultatet</button>
@@ -485,16 +437,13 @@ button {
     <section id="quizLinkScreen" class="hidden">
         <h1>Kan du skilja AI från verkligheten?</h1>
         <img class="screen-image" src="quiz1.jpg" alt="SVT:s quiz om AI-bilder och videor">
-
         <p>SVT har ett quiz där du får testa om du kan skilja AI-genererade videor från verkliga videor.</p>
-
         <p>
             <a href="https://www.svt.se/special/kan-du-skilja-pa-en-ai-video-och-en-riktig/"
                target="_blank" rel="noopener noreferrer">
                 Öppna SVT:s AI-quiz
             </a>
         </p>
-
         <button class="main-button" onclick="showResultPage()">Tillbaka till resultatet</button>
         <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
     </section>
@@ -502,29 +451,23 @@ button {
     <section id="newsScreen" class="hidden">
         <h1>Jämför flera nyhetskällor</h1>
         <p>Om du undrar om en nyhet stämmer kan du undersöka vad flera etablerade nyhetskällor skriver.</p>
-
         <div class="link-list">
             <a class="news-link" href="https://www.svt.se/" target="_blank" rel="noopener noreferrer">
                 <img src="svt.jpg" alt="SVT">
             </a>
-
             <a class="news-link" href="https://sverigesradio.se/" target="_blank" rel="noopener noreferrer">
                 <img src="sr.jpg" alt="Sveriges Radio">
             </a>
-
             <a class="news-link" href="https://www.dn.se/" target="_blank" rel="noopener noreferrer">
                 <img src="dn.jpg" alt="Dagens Nyheter">
             </a>
-
             <a class="news-link" href="https://www.bbc.com/news" target="_blank" rel="noopener noreferrer">
                 <img src="bbc.jpg" alt="BBC News">
             </a>
-
             <a class="news-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
                 <img src="google.jpg" alt="Google">
             </a>
         </div>
-
         <p class="small-note">Tänk på att även etablerade källor kan behöva kompletteras med mer information.</p>
         <button class="main-button" onclick="returnToQuestion()">Tillbaka till frågan</button>
     </section>
@@ -535,9 +478,7 @@ button {
 <audio id="booSound" src="bu.wav" preload="auto"></audio>
 
 <script>
-
 const questions = [
-
     {
         question: "Du söker efter information på Google. Vilket påstående stämmer bäst?",
         image: "googlesok.jpg",
@@ -556,7 +497,6 @@ Fundera vidare på:
 Vem har skrivit det här?
 Står det samma sak på andra sidor jag litar på?`
     },
-
     {
         question: "En AI-chattbot ger dig ett svar. Kan du alltid lita på att svaret är rätt?",
         image: "ai.jpg",
@@ -574,8 +514,6 @@ Fundera vidare på:
 Vad kan du göra om du är osäker på om AI säger sanningen?
 Vem kan du fråga om du vill veta om ett svar från AI stämmer?`
     },
-
-
     {
         question: "Någon publicerar en bild på dig på nätet. Kan du alltid få bort den helt genom att be personen radera den?",
         image: "ungdomar.jpg",
@@ -595,9 +533,8 @@ Fundera vidare på:
 Vad kan hända med en bild efter att du har publicerat den på nätet?
 Varför är det viktigt att fråga innan man publicerar bilder på andra?`
     },
-
     {
-       question: "Du ser en dramatisk nyhet i sociala medier. Vad är bäst att göra innan du tror på den eller delar den?",
+        question: "Du ser en dramatisk nyhet i sociala medier. Vad är bäst att göra innan du tror på den eller delar den?",
         image: "nyheter.jpg",
         options: [
             "Dela den snabbt så att andra får veta.",
@@ -614,7 +551,6 @@ Vad kan hända om du delar en nyhet som inte är sann?
 Hur kan du ta reda på om en nyhet går att lita på?`,
         newsLinks: true
     },
-
     {
         question: "Du säljer en jacka på Vinted. Köparen skriver att hen har swishat för mycket och ber dig swisha tillbaka mellanskillnaden. Vad gör du?",
         image: "ungdomar.jpg",
@@ -632,7 +568,6 @@ Fundera vidare på:
 Vad kan du göra om köparen stressar dig att swisha tillbaka pengarna snabbt?
 Vem kan du be om hjälp om du misstänker att någon försöker lura dig på nätet?`
     },
-
     {
         question: "Du får ett samtal från ett okänt nummer. Rösten låter som din pappa: ”Jag har tappat min telefon. Swisha 2 000 kr till det här numret, snabbt!” Vad gör du?",
         image: "luras.jpg",
@@ -650,7 +585,6 @@ Fundera vidare på:
 Kan du alltid lita på att det är rätt person som ringer, även om rösten låter bekant?
 Vad kan du göra om du redan har skickat pengar och sedan misstänker att du blivit lurad?`
     },
-
     {
         question: "Du ser en annons på Instagram för märkesskor för 299 kronor. De brukar kosta 2 000 kronor. Det står ”Bara i dag – endast tre par kvar!”. Vad bör du misstänka?",
         image: "luras.jpg",
@@ -668,7 +602,6 @@ Fundera vidare på:
 Hur känns det när du tror att du missar ett erbjudande?
 Vad kan du kontrollera innan du handlar från en webbutik du inte känner till?`
     },
-
     {
         question: "Ett inlägg lovar gratis pengar. I kommentarerna står det ”Det fungerar, jag fick 5 000 kr!”. Vilket är den tydligaste varningssignalen?",
         image: "luras.jpg",
@@ -686,7 +619,6 @@ Fundera vidare på:
 Vad kan du göra om du är osäker på om ett konto är äkta?
 Varför kan du inte lita på positiva kommentarer?`
     },
-
     {
         question: "Du ser en bild av en haj som simmar på en översvämmad gata. Hur kan du bäst undersöka om bilden är äkta och aktuell?",
         image: "luras.jpg",
@@ -704,7 +636,6 @@ Fundera vidare på:
 Varför kan någon vilja sprida en gammal bild som om den vore ny?
 Vad kan hända om människor delar en falsk bild utan att kontrollera den?`
     },
-
     {
         question: "Du frågar en AI-chattbot om en bok som handlar om hundar. AI tipsar om en bok med titel och författare. Vad gör du?",
         image: "ai.jpg",
@@ -722,7 +653,6 @@ Fundera vidare på:
 Varför tror du att AI ibland hittar på information som inte stämmer?
 Hur skulle du förklara för en kompis att AI också kan göra misstag?`
     }
-
 ];
 
 let currentQuestion = 0;
@@ -764,7 +694,6 @@ function startGame() {
 
 function showQuestion() {
     answered = false;
-
     const q = questions[currentQuestion];
 
     document.getElementById("progressText").textContent =
@@ -816,12 +745,10 @@ function showQuestion() {
 
 function playSound(soundId) {
     const sound = document.getElementById(soundId);
-
     if (!sound) return;
 
     try {
         sound.currentTime = 0;
-
         const playPromise = sound.play();
 
         if (playPromise && typeof playPromise.catch === "function") {
@@ -838,7 +765,6 @@ function answer(selectedIndex) {
     if (answered) return;
 
     answered = true;
-
     const q = questions[currentQuestion];
     const isCorrect = selectedIndex === q.correct;
 
@@ -875,7 +801,6 @@ function answer(selectedIndex) {
     const explanation = document.getElementById("feedbackExplanation");
 
     result.textContent = isCorrect ? "✓ Rätt svar!" : "✗ Inte riktigt!";
-
     result.className = "feedback-result " +
         (isCorrect ? "correct-text" : "incorrect-text");
 
@@ -888,23 +813,19 @@ function answer(selectedIndex) {
 
     feedbackImage.style.display = "block";
 
-    // Skapa förklaringsrutan.
     explanation.innerHTML = "";
 
     const heading = document.createElement("span");
     heading.className = "feedback-heading";
     heading.textContent = "💡 Så här ligger det till!";
-
     explanation.appendChild(heading);
 
-    // Dela upp förklaringen och reflektionsfrågorna.
     const parts = q.explanation.split(/Fundera vidare på:/i);
 
     const explanationText = document.createElement("div");
     explanationText.textContent = parts[0].trim();
     explanation.appendChild(explanationText);
 
-    // Visa blå rubrik och punktlista om frågan har reflektionsfrågor.
     if (parts.length > 1) {
         const reflectionHeading = document.createElement("span");
         reflectionHeading.className = "reflection-heading";
@@ -945,11 +866,8 @@ function answer(selectedIndex) {
             : "Nästa fråga →";
 
     feedback.classList.remove("hidden");
-
-    // Flytta fokus till återkopplingen så att den blir lättare att hitta.
     result.setAttribute("tabindex", "-1");
     result.focus({ preventScroll: true });
-
     feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
@@ -975,18 +893,15 @@ function showResultPage() {
 
     let message;
 
-    if (score >= 12) {
+    if (score >= 9) {
         message = "<h2>Fantastiskt detektivarbete!</h2>" +
             "<p>Du verkar vara bra på att upptäcka varningssignaler. Fortsätt att vara nyfiken och kontrollera information.</p>";
-
-    } else if (score >= 9) {
+    } else if (score >= 7) {
         message = "<h2>Mycket bra jobbat!</h2>" +
             "<p>Du har många bra strategier för att upptäcka bluffar och falsk information. Fortsätt öva på att kontrollera källor.</p>";
-
-    } else if (score >= 6) {
+    } else if (score >= 5) {
         message = "<h2>Bra jobbat!</h2>" +
             "<p>Du har redan flera användbara kunskaper. Kom ihåg att stanna upp och kontrollera när något verkar för bra eller brådskande för att vara sant.</p>";
-
     } else {
         message = "<h2>Här finns mycket att lära!</h2>" +
             "<p>Nu har du fått tips om vad du kan vara uppmärksam på. Det viktigaste är att våga stanna upp, kontrollera och fråga någon om hjälp när något känns osäkert.</p>";
@@ -1019,26 +934,55 @@ function showPersonPage() {
 }
 
 function showSecondImage() {
-    personImageIndex = (personImageIndex + 1) % 2;
+    // Fyra bilder: två Ulf-bilder följda av två kungabilder.
+    personImageIndex = (personImageIndex + 1) % 4;
     showPersonImage();
 }
 
 function showPersonImage() {
     const img = document.getElementById("personImage");
     const caption = document.getElementById("personCaption");
+    const nextButton = document.querySelector("#personScreen .main-button");
 
-    if (personImageIndex === 0) {
-        img.src = "ulfk2.jpg";
-        caption.textContent = "Bild 1";
-    } else {
-        img.src = "ulfk1.jpg";
-        caption.textContent = "Bild 2";
-    }
+    const images = [
+        {
+            src: "ulfk2.jpg",
+            alt: "Bild på Ulf",
+            caption: "Ulf – bild 1"
+        },
+        {
+            src: "ulfk1.jpg",
+            alt: "Bild på Ulf",
+            caption: "Ulf – bild 2"
+        },
+        {
+            src: "kungenai.jpg",
+            alt: "AI-genererad bild av Sveriges kung",
+            caption: "Kungen – AI-genererad bild"
+        },
+        {
+            src: "kungenriktig.jpg",
+            alt: "Fotografi av Sveriges kung",
+            caption: "Kungen – riktig bild"
+        }
+    ];
+
+    const currentImage = images[personImageIndex];
+
+    img.src = currentImage.src;
+    img.alt = currentImage.alt;
+    caption.textContent = currentImage.caption;
+
+    nextButton.textContent =
+        personImageIndex === images.length - 1
+            ? "Börja om från första bilden"
+            : "Visa nästa bild";
 
     img.onerror = function () {
         this.style.display = "none";
         caption.textContent =
-            "Bilden kunde inte visas. Kontrollera att bildfilen finns kvar.";
+            "Bilden kunde inte visas. Kontrollera att bildfilen finns kvar: " +
+            currentImage.src;
     };
 
     img.style.display = "block";
@@ -1047,8 +991,6 @@ function showPersonImage() {
 function showQuizPage() {
     showScreen("quizLinkScreen");
 }
-
 </script>
-
 </body>
 </html>
