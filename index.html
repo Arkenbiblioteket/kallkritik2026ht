@@ -7,7 +7,9 @@
 <title>Sanningsdetektiven</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -26,7 +28,7 @@ body {
 .container {
     width: 100%;
     max-width: 900px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 22px;
     padding: 28px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
@@ -69,7 +71,9 @@ p {
     border-radius: 12px;
 }
 
-button { font-family: inherit; }
+button {
+    font-family: inherit;
+}
 
 .main-button,
 .next-button,
@@ -86,7 +90,7 @@ button { font-family: inherit; }
 
 .main-button,
 .next-button {
-    color: #fff;
+    color: white;
     background: #176a9b;
     box-shadow: 0 4px 0 #104c70;
 }
@@ -180,11 +184,13 @@ button { font-family: inherit; }
     align-items: center;
     border-radius: 50%;
     background: #176a9b;
-    color: #fff;
+    color: white;
     font-weight: 800;
 }
 
-.answer-button:disabled { cursor: default; }
+.answer-button:disabled {
+    cursor: default;
+}
 
 .answer-button.correct {
     background: #d9f5e5;
@@ -192,7 +198,9 @@ button { font-family: inherit; }
     color: #164d30;
 }
 
-.answer-button.correct .answer-letter { background: #258653; }
+.answer-button.correct .answer-letter {
+    background: #258653;
+}
 
 .answer-button.incorrect {
     background: #fde3e3;
@@ -200,13 +208,20 @@ button { font-family: inherit; }
     color: #762626;
 }
 
-.answer-button.incorrect .answer-letter { background: #c74747; }
-.answer-button.muted { opacity: 0.65; }
+.answer-button.incorrect .answer-letter {
+    background: #c74747;
+}
+
+.answer-button.muted {
+    opacity: 0.65;
+}
 
 .feedback {
     margin-top: 22px;
     animation: fadeIn 0.35s ease-out;
 }
+
+/* Den tydliga förklaringsrutan visas efter varje svar. */
 
 .feedback-explanation {
     white-space: pre-line;
@@ -240,8 +255,13 @@ button { font-family: inherit; }
     margin: 10px 0;
 }
 
-.feedback-result.correct-text { color: #187344; }
-.feedback-result.incorrect-text { color: #b02c2c; }
+.feedback-result.correct-text {
+    color: #187344;
+}
+
+.feedback-result.incorrect-text {
+    color: #b02c2c;
+}
 
 .feedback-image {
     display: block;
@@ -280,7 +300,9 @@ button { font-family: inherit; }
     font-weight: 700;
 }
 
-.news-link:hover { background: #e0eff8; }
+.news-link:hover {
+    background: #e0eff8;
+}
 
 .news-link img {
     max-width: 100px;
@@ -293,7 +315,9 @@ button { font-family: inherit; }
     font-size: 0.95rem;
 }
 
-.hidden { display: none !important; }
+.hidden {
+    display: none !important;
+}
 
 .result-score {
     font-size: 2rem;
@@ -310,13 +334,25 @@ button { font-family: inherit; }
 }
 
 @keyframes popIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 620px) {
@@ -356,6 +392,7 @@ button { font-family: inherit; }
 </head>
 
 <body>
+
 <div class="container">
 
     <section id="startScreen">
@@ -368,7 +405,7 @@ button { font-family: inherit; }
     <section id="introScreen" class="hidden">
         <h1>Välkommen till Sanningsdetektiven!</h1>
         <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet">
-        <p>Du får <span id="questionCount">10</span> frågor med fyra svarsalternativ. Välj det svar du tycker är bäst.</p>
+        <p>Du får 14 frågor med fyra svarsalternativ. Välj det svar du tycker är bäst.</p>
         <p>Efter varje svar får du veta om det var rätt och läsa en förklaring. Du får en poäng för varje rätt svar.</p>
         <p><strong>Lycka till – och tänk som en detektiv!</strong></p>
         <button class="main-button" onclick="startGame()">Nu kör vi!</button>
@@ -448,15 +485,19 @@ button { font-family: inherit; }
             <a class="news-link" href="https://www.svt.se/" target="_blank" rel="noopener noreferrer">
                 <img src="svt.jpg" alt="SVT">
             </a>
+
             <a class="news-link" href="https://sverigesradio.se/" target="_blank" rel="noopener noreferrer">
                 <img src="sr.jpg" alt="Sveriges Radio">
             </a>
+
             <a class="news-link" href="https://www.dn.se/" target="_blank" rel="noopener noreferrer">
                 <img src="dn.jpg" alt="Dagens Nyheter">
             </a>
+
             <a class="news-link" href="https://www.bbc.com/news" target="_blank" rel="noopener noreferrer">
                 <img src="bbc.jpg" alt="BBC News">
             </a>
+
             <a class="news-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
                 <img src="google.jpg" alt="Google">
             </a>
@@ -472,7 +513,9 @@ button { font-family: inherit; }
 <audio id="booSound" src="bu.wav" preload="auto"></audio>
 
 <script>
+
 const questions = [
+
     {
         question: "Du söker efter information på Google. Vilket påstående stämmer bäst?",
         image: "googlesok.jpg",
@@ -483,8 +526,15 @@ const questions = [
             "Om en sida ser proffsig ut kan jag lita på den."
         ],
         correct: 2,
-        explanation: "Google visar många olika sidor. Vissa är annonser. Andra kan ha fel information.\nDet går inte att lita på en sida bara för att den ligger först eller ser snygg ut.\n\nFundera vidare på:\nVem har skrivit det här?\nStår det samma sak på andra sidor jag litar på?"
+        explanation: `Google visar många olika sidor. Vissa är annonser. Andra kan ha fel information.
+Det går inte att lita på en sida bara för att den ligger först eller ser snygg ut.
+
+Fundera vidare på:
+
+Vem har skrivit det här?
+Står det samma sak på andra sidor jag litar på?`
     },
+
     {
         question: "En AI-chattbot ger dig ett svar. Kan du alltid lita på att svaret är rätt?",
         image: "ai.jpg",
@@ -495,8 +545,14 @@ const questions = [
             "Ja, om man använder en välkänd AI-tjänst."
         ],
         correct: 2,
-        explanation: "AI kan låta säker även när den har fel. Kontrollera viktiga uppgifter mot tillförlitliga källor, särskilt när det gäller hälsa, pengar eller skolarbete.\n\nFundera vidare på:\nVad kan du göra om du är osäker på om AI säger sanningen?\nVem kan du fråga om du vill veta om ett svar från AI stämmer?"
+        explanation: `AI kan låta säker även när den har fel. Kontrollera viktiga uppgifter mot tillförlitliga källor, särskilt när det gäller hälsa, pengar eller skolarbete.
+
+Fundera vidare på:
+
+Vad kan du göra om du är osäker på om AI säger sanningen?
+Vem kan du fråga om du vill veta om ett svar från AI stämmer?`
     },
+
     {
         question: "Någon publicerar en bild på dig på nätet. Kan du alltid få bort den helt genom att be personen radera den?",
         image: "ungdomar.jpg",
@@ -507,8 +563,11 @@ const questions = [
             "Nej, andra kan redan ha sparat eller delat bilden vidare."
         ],
         correct: 3,
-        explanation: "En bild kan kopieras, skärmdumpas och spridas vidare.\nDärför är det klokt att tänka efter innan man publicerar bilder.\nOm någon sprider en bild mot din vilja kan du be om hjälp att få den borttagen."
+        explanation: `En bild kan kopieras, skärmdumpas och spridas vidare.
+Därför är det klokt att tänka efter innan man publicerar bilder.
+Om någon sprider en bild mot din vilja kan du be om hjälp att få den borttagen.`
     },
+
     {
         question: "Du ser en dramatisk nyhet i sociala medier. Vad är bäst att göra innan du tror på den eller delar den?",
         image: "nyheter.jpg",
@@ -519,9 +578,15 @@ const questions = [
             "Lita på den om bilden ser äkta ut."
         ],
         correct: 1,
-        explanation: "Jämför nyheten med flera oberoende och trovärdiga källor. Kontrollera vem som publicerat den, när den publicerades och om andra seriösa medier rapporterar samma sak.\n\nFundera vidare på:\nVad kan hända om du delar en nyhet som inte är sann?\nHur kan du ta reda på om en nyhet går att lita på?",
+        explanation: `Jämför nyheten med flera oberoende och trovärdiga källor. Kontrollera vem som publicerat den, när den publicerades och om andra seriösa medier rapporterar samma sak.
+
+Fundera vidare på:
+
+Vad kan hända om du delar en nyhet som inte är sann?
+Hur kan du ta reda på om en nyhet går att lita på?`,
         newsLinks: true
     },
+
     {
         question: "Du säljer en jacka på Vinted. Köparen skriver att hen har swishat för mycket och ber dig swisha tillbaka mellanskillnaden. Vad gör du?",
         image: "ungdomar.jpg",
@@ -532,8 +597,14 @@ const questions = [
             "Kontrollerar själv i Swish att betalningen verkligen kommit in och kontaktar plattformen eller banken om något verkar fel."
         ],
         correct: 3,
-        explanation: "Lita inte enbart på köparens meddelande eller en skärmdump. Kontrollera själv i din bank eller Swish om pengarna verkligen kommit in. Om något verkar misstänkt ska du inte skicka pengar vidare.\n\nFundera vidare på:\nVad kan du göra om köparen stressar dig att swisha tillbaka pengarna snabbt?\nVem kan du be om hjälp om du misstänker att någon försöker lura dig på nätet?"
+        explanation: `Lita inte enbart på köparens meddelande eller en skärmdump. Kontrollera själv i din bank eller Swish om pengarna verkligen kommit in. Om något verkar misstänkt ska du inte skicka pengar vidare.
+
+Fundera vidare på:
+
+Vad kan du göra om köparen stressar dig att swisha tillbaka pengarna snabbt?
+Vem kan du be om hjälp om du misstänker att någon försöker lura dig på nätet?`
     },
+
     {
         question: "Du får ett samtal från ett okänt nummer. Rösten låter som din pappa: ”Jag har tappat min telefon. Swisha 2 000 kr till det här numret, snabbt!” Vad gör du?",
         image: "luras.jpg",
@@ -544,8 +615,14 @@ const questions = [
             "Frågar efter hans mellannamn och swishar om han svarar rätt."
         ],
         correct: 2,
-        explanation: "AI kan användas för att härma en persons röst. Brådska och krav på pengar är varningssignaler. Lägg på och ring personen på ett nummer du redan känner till innan du gör något.\n\nFundera vidare på:\nKan du alltid lita på att det är rätt person som ringer, även om rösten låter bekant?\nVad kan du göra om du redan har skickat pengar och sedan misstänker att du blivit lurad?"
+        explanation: `AI kan användas för att härma en persons röst. Brådska och krav på pengar är varningssignaler. Lägg på och ring personen på ett nummer du redan känner till innan du gör något.
+
+Fundera vidare på:
+
+Kan du alltid lita på att det är rätt person som ringer, även om rösten låter bekant?
+Vad kan du göra om du redan har skickat pengar och sedan misstänker att du blivit lurad?`
     },
+
     {
         question: "Du ser en annons på Instagram för märkesskor för 299 kronor. De brukar kosta 2 000 kronor. Det står ”Bara i dag – endast tre par kvar!”. Vad bör du misstänka?",
         image: "luras.jpg",
@@ -556,8 +633,14 @@ const questions = [
             "Det är alltid ett misstag i prissättningen."
         ],
         correct: 0,
-        explanation: "Ett orimligt lågt pris tillsammans med tidspress kan vara tecken på en bluff. Kontrollera webbutikens namn, kontaktuppgifter och oberoende omdömen innan du handlar. Klicka inte vidare eller betala bara för att erbjudandet verkar brådskande.\n\nFundera vidare på:\nHur känns det när du tror att du missar ett erbjudande?\nVad kan du kontrollera innan du handlar från en webbutik du inte känner till?"
+        explanation: `Ett orimligt lågt pris tillsammans med tidspress kan vara tecken på en bluff. Kontrollera webbutikens namn, kontaktuppgifter och oberoende omdömen innan du handlar. Klicka inte vidare eller betala bara för att erbjudandet verkar brådskande.
+
+Fundera vidare på:
+
+Hur känns det när du tror att du missar ett erbjudande?
+Vad kan du kontrollera innan du handlar från en webbutik du inte känner till?`
     },
+
     {
         question: "Ett inlägg lovar gratis pengar. I kommentarerna står det ”Det fungerar, jag fick 5 000 kr!”. Vilket är den tydligaste varningssignalen?",
         image: "luras.jpg",
@@ -568,8 +651,14 @@ const questions = [
             "Att flera konton har få inlägg, märkliga namn och nästan identiska kommentarer."
         ],
         correct: 3,
-        explanation: "Bedragare kan använda falska konton och kommentarer för att få ett erbjudande att verka trovärdigt. Många kommentarer eller en känd persons bild bevisar inte att något är äkta.\n\nFundera vidare på:\nVad kan du göra om du är osäker på om ett konto är äkta?\nVarför kan du inte lita på positiva kommentarer?"
+        explanation: `Bedragare kan använda falska konton och kommentarer för att få ett erbjudande att verka trovärdigt. Många kommentarer eller en känd persons bild bevisar inte att något är äkta.
+
+Fundera vidare på:
+
+Vad kan du göra om du är osäker på om ett konto är äkta?
+Varför kan du inte lita på positiva kommentarer?`
     },
+
     {
         question: "Du ser en bild av en haj som simmar på en översvämmad gata. Hur kan du bäst undersöka om bilden är äkta och aktuell?",
         image: "luras.jpg",
@@ -580,8 +669,14 @@ const questions = [
             "Fråga en kompis om bilden ser verklig ut."
         ],
         correct: 0,
-        explanation: "Med en omvänd bildsökning kan du ibland hitta bildens ursprung och se om den är gammal, manipulerad eller hämtad från en annan händelse. Jämför också med trovärdiga nyhetskällor.\n\nFundera vidare på:\nVarför kan någon vilja sprida en gammal bild som om den vore ny?\nVad kan hända om människor delar en falsk bild utan att kontrollera den?"
+        explanation: `Med en omvänd bildsökning kan du ibland hitta bildens ursprung och se om den är gammal, manipulerad eller hämtad från en annan händelse. Jämför också med trovärdiga nyhetskällor.
+
+Fundera vidare på:
+
+Varför kan någon vilja sprida en gammal bild som om den vore ny?
+Vad kan hända om människor delar en falsk bild utan att kontrollera den?`
     },
+
     {
         question: "Du frågar en AI-chattbot om en bok som handlar om hundar. AI tipsar om en bok med titel och författare. Vad gör du?",
         image: "ai.jpg",
@@ -592,8 +687,14 @@ const questions = [
             "Tror att boken finns om titeln låter bra."
         ],
         correct: 1,
-        explanation: "AI kan hitta på boktitlar och författare som låter riktiga. Kontrollera att boken verkligen finns, till exempel i bibliotekets katalog.\n\nFundera vidare på:\nVarför tror du att AI ibland hittar på information som inte stämmer?\nHur skulle du förklara för en kompis att AI också kan göra misstag?"
+        explanation: `AI kan hitta på boktitlar och författare som låter riktiga. Kontrollera att boken verkligen finns, till exempel i bibliotekets katalog.
+
+Fundera vidare på:
+
+Varför tror du att AI ibland hittar på information som inte stämmer?
+Hur skulle du förklara för en kompis att AI också kan göra misstag?`
     }
+
 ];
 
 let currentQuestion = 0;
@@ -611,8 +712,6 @@ const screenIds = [
     "quizLinkScreen",
     "newsScreen"
 ];
-
-document.getElementById("questionCount").textContent = questions.length;
 
 function showScreen(screenId) {
     screenIds.forEach(id => {
@@ -635,15 +734,6 @@ function startGame() {
     showQuestion();
 }
 
-function setImage(imageElement, src, fallbackDisplay = "block") {
-    imageElement.onerror = function () {
-        this.style.display = "none";
-    };
-
-    imageElement.style.display = fallbackDisplay;
-    imageElement.src = src;
-}
-
 function showQuestion() {
     answered = false;
 
@@ -656,14 +746,18 @@ function showQuestion() {
         "Poäng: " + score + " av " + questions.length;
 
     document.getElementById("progressFill").style.width =
-        (currentQuestion / questions.length * 100) + "%";
+        ((currentQuestion / questions.length) * 100) + "%";
 
     document.getElementById("questionText").textContent = q.question;
 
     const questionImage = document.getElementById("questionImage");
-    setImage(questionImage, q.image);
-
+    questionImage.src = q.image;
     questionImage.alt = "Bild till fråga " + (currentQuestion + 1);
+    questionImage.style.display = "block";
+
+    questionImage.onerror = function () {
+        this.style.display = "none";
+    };
 
     const optionsContainer = document.getElementById("answerOptions");
     optionsContainer.innerHTML = "";
@@ -673,32 +767,33 @@ function showQuestion() {
         button.type = "button";
         button.className = "answer-button";
 
-        const letter = document.createElement("span");
-        letter.className = "answer-letter";
-        letter.textContent = String.fromCharCode(65 + index);
+        button.innerHTML =
+            '<span class="answer-letter">' +
+            String.fromCharCode(65 + index) +
+            '</span><span></span>';
 
-        const answerText = document.createElement("span");
-        answerText.textContent = option;
-
-        button.appendChild(letter);
-        button.appendChild(answerText);
+        button.querySelector("span:last-child").textContent = option;
         button.addEventListener("click", () => answer(index));
-
         optionsContainer.appendChild(button);
     });
 
     document.getElementById("feedback").classList.add("hidden");
     document.getElementById("feedbackResult").textContent = "";
-    document.getElementById("feedbackExplanation").innerHTML = "";
+    document.getElementById("feedbackExplanation").textContent = "";
     document.getElementById("extraLinks").innerHTML = "";
+
+    document.getElementById("progressFill").style.width =
+        ((currentQuestion / questions.length) * 100) + "%";
 }
 
 function playSound(soundId) {
     const sound = document.getElementById(soundId);
+
     if (!sound) return;
 
     try {
         sound.currentTime = 0;
+
         const playPromise = sound.play();
 
         if (playPromise && typeof playPromise.catch === "function") {
@@ -726,7 +821,9 @@ function answer(selectedIndex) {
         playSound("booSound");
     }
 
-    document.querySelectorAll(".answer-button").forEach((button, index) => {
+    const buttons = document.querySelectorAll(".answer-button");
+
+    buttons.forEach((button, index) => {
         button.disabled = true;
 
         if (index === q.correct) {
@@ -742,7 +839,7 @@ function answer(selectedIndex) {
         "Poäng: " + score + " av " + questions.length;
 
     document.getElementById("progressFill").style.width =
-        ((currentQuestion + 1) / questions.length * 100) + "%";
+        (((currentQuestion + 1) / questions.length) * 100) + "%";
 
     const feedback = document.getElementById("feedback");
     const result = document.getElementById("feedbackResult");
@@ -750,12 +847,20 @@ function answer(selectedIndex) {
     const explanation = document.getElementById("feedbackExplanation");
 
     result.textContent = isCorrect ? "✓ Rätt svar!" : "✗ Inte riktigt!";
+
     result.className = "feedback-result " +
         (isCorrect ? "correct-text" : "incorrect-text");
 
-    setImage(feedbackImage, isCorrect ? "glad.jpg" : "oops.jpg");
+    feedbackImage.src = isCorrect ? "glad.jpg" : "oops.jpg";
     feedbackImage.alt = isCorrect ? "Glad reaktion" : "Oj, inte riktigt";
 
+    feedbackImage.onerror = function () {
+        this.style.display = "none";
+    };
+
+    feedbackImage.style.display = "block";
+
+    // Den synliga rutan med förklaringen.
     explanation.innerHTML = "";
 
     const heading = document.createElement("span");
@@ -773,7 +878,6 @@ function answer(selectedIndex) {
 
     if (q.newsLinks) {
         const newsButton = document.createElement("button");
-        newsButton.type = "button";
         newsButton.className = "secondary-button";
         newsButton.textContent = "Visa nyhetskällor";
         newsButton.addEventListener("click", openNews);
@@ -787,8 +891,10 @@ function answer(selectedIndex) {
 
     feedback.classList.remove("hidden");
 
+    // Flytta fokus till återkopplingen så att den blir lättare att hitta.
     result.setAttribute("tabindex", "-1");
     result.focus({ preventScroll: true });
+
     feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
@@ -814,21 +920,20 @@ function showResultPage() {
 
     let message;
 
-    if (score >= total * 0.85) {
-        message =
-            "<h2>Fantastiskt detektivarbete!</h2>" +
+    if (score >= 12) {
+        message = "<h2>Fantastiskt detektivarbete!</h2>" +
             "<p>Du verkar vara bra på att upptäcka varningssignaler. Fortsätt att vara nyfiken och kontrollera information.</p>";
-    } else if (score >= total * 0.65) {
-        message =
-            "<h2>Mycket bra jobbat!</h2>" +
+
+    } else if (score >= 9) {
+        message = "<h2>Mycket bra jobbat!</h2>" +
             "<p>Du har många bra strategier för att upptäcka bluffar och falsk information. Fortsätt öva på att kontrollera källor.</p>";
-    } else if (score >= total * 0.4) {
-        message =
-            "<h2>Bra jobbat!</h2>" +
+
+    } else if (score >= 6) {
+        message = "<h2>Bra jobbat!</h2>" +
             "<p>Du har redan flera användbara kunskaper. Kom ihåg att stanna upp och kontrollera när något verkar för bra eller brådskande för att vara sant.</p>";
+
     } else {
-        message =
-            "<h2>Här finns mycket att lära!</h2>" +
+        message = "<h2>Här finns mycket att lära!</h2>" +
             "<p>Nu har du fått tips om vad du kan vara uppmärksam på. Det viktigaste är att våga stanna upp, kontrollera och fråga någon om hjälp när något känns osäkert.</p>";
     }
 
@@ -867,14 +972,6 @@ function showPersonImage() {
     const img = document.getElementById("personImage");
     const caption = document.getElementById("personCaption");
 
-    img.onerror = function () {
-        this.style.display = "none";
-        caption.textContent =
-            "Bilden kunde inte visas. Kontrollera att bildfilen finns kvar.";
-    };
-
-    img.style.display = "block";
-
     if (personImageIndex === 0) {
         img.src = "ulfk2.jpg";
         caption.textContent = "Bild 1";
@@ -882,11 +979,21 @@ function showPersonImage() {
         img.src = "ulfk1.jpg";
         caption.textContent = "Bild 2";
     }
+
+    img.onerror = function () {
+        this.style.display = "none";
+        caption.textContent =
+            "Bilden kunde inte visas. Kontrollera att bildfilen finns kvar.";
+    };
+
+    img.style.display = "block";
 }
 
 function showQuizPage() {
     showScreen("quizLinkScreen");
 }
+
 </script>
+
 </body>
 </html>
