@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanningsdetektiven</title>
+<title>Tänk ett varv till!</title>
 
 <style>
 * {
@@ -39,6 +38,13 @@ h1 {
     color: #174d75;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin: 5px 0 15px;
+}
+
+.subtitle {
+    color: #176a9b;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 700;
+    margin: -5px 0 18px;
 }
 
 h2 {
@@ -137,10 +143,10 @@ button {
 }
 
 .question-text {
-    white-space: pre-line;
     font-size: clamp(1.15rem, 2.5vw, 1.4rem);
     font-weight: 700;
     line-height: 1.5;
+    white-space: pre-line;
     margin: 20px 0;
 }
 
@@ -152,7 +158,6 @@ button {
 }
 
 .answer-button {
-    white-space: pre-line;
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -221,10 +226,8 @@ button {
     animation: fadeIn 0.35s ease-out;
 }
 
-/* Förklaringsrutan som visas efter varje svar. */
-
+/* Den tydliga förklaringsrutan visas efter varje svar. */
 .feedback-explanation {
-    white-space: pre-line;
     display: block;
     text-align: left;
     margin: 18px 0;
@@ -236,6 +239,7 @@ button {
     color: #30343a;
     font-size: 1.08rem;
     line-height: 1.7;
+    white-space: pre-line;
     font-weight: 500;
     box-shadow: 0 6px 16px rgba(74, 60, 15, 0.17);
     animation: popIn 0.35s ease-out;
@@ -247,28 +251,6 @@ button {
     font-size: 1.15rem;
     font-weight: 800;
     margin-bottom: 8px;
-}
-
-/* Blå rubrik för reflektionsfrågorna. */
-
-.reflection-heading {
-    display: block;
-    color: #176a9b;
-    font-size: 1.08rem;
-    font-weight: 800;
-    margin-top: 18px;
-    margin-bottom: 6px;
-}
-
-/* Punktlista med reflektionsfrågor. */
-
-.reflection-list {
-    margin: 0;
-    padding-left: 25px;
-}
-
-.reflection-list li {
-    margin-bottom: 5px;
 }
 
 .feedback-result {
@@ -417,24 +399,38 @@ button {
 
 <div class="container">
 
+    <!-- Gemensam startskärm -->
     <section id="startScreen">
-        <h1>🕵️ Sanningsdetektiven</h1>
-        <p>Hur bra är du på att upptäcka bluffar, falska nyheter och sådant som inte verkar stämma på nätet?</p>
-        <img class="screen-image" src="start.jpg" alt="Sanningsdetektiven">
-        <button class="main-button" onclick="showIntroduction()">Starta spelet</button>
+        <h1>💡 Tänk ett varv till!</h1>
+
+        <p class="subtitle">
+            Ett spel om källkritik, AI och bluffar på nätet.
+        </p>
+
+        <img class="screen-image"
+             src="start.jpg"
+             alt="Bild till spelet Tänk ett varv till">
+
+        <p>
+            Hur bra är du på att genomskåda bluffar, granska information
+            och upptäcka sådant som inte verkar stämma på nätet?
+        </p>
+
+        <p>
+            Du får frågor med fyra svarsalternativ. Efter varje svar får du
+            en förklaring. Du får en poäng för varje rätt svar.
+        </p>
+
+        <p><strong>Är du redo? Testa vad du kan!</strong></p>
+
+        <button class="main-button" onclick="startGame()">
+            Starta spelet →
+        </button>
     </section>
 
-    <section id="introScreen" class="hidden">
-        <h1>Välkommen till Sanningsdetektiven!</h1>
-        <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet">
-        <p>Du får 10 frågor med fyra svarsalternativ. Välj det svar du tycker är bäst.</p>
-        <p>Efter varje svar får du veta om det var rätt och läsa en förklaring. Du får en poäng för varje rätt svar.</p>
-        <p><strong>Lycka till – och tänk som en detektiv!</strong></p>
-        <button class="main-button" onclick="startGame()">Nu kör vi!</button>
-    </section>
-
+    <!-- Frågeskärm -->
     <section id="gameScreen" class="hidden">
-        <h1>🕵️ Sanningsdetektiven</h1>
+        <h1>💡 Tänk ett varv till!</h1>
 
         <div class="progress">
             <div id="progressFill" class="progress-fill"></div>
@@ -443,99 +439,182 @@ button {
         <div id="progressText" class="progress-text"></div>
         <div id="scoreText" class="score-line"></div>
 
-        <img id="questionImage" class="question-image" src="luras.jpg" alt="Bild till frågan">
+        <img id="questionImage"
+             class="question-image"
+             src="luras.jpg"
+             alt="Bild till frågan">
 
         <div id="questionText" class="question-text"></div>
         <div id="answerOptions" class="answer-options"></div>
 
         <div id="feedback" class="feedback hidden" aria-live="polite">
             <div id="feedbackResult" class="feedback-result"></div>
-            <img id="feedbackImage" class="feedback-image" src="glad.jpg" alt="">
+
+            <img id="feedbackImage"
+                 class="feedback-image"
+                 src="glad.jpg"
+                 alt="">
+
             <div id="feedbackExplanation" class="feedback-explanation"></div>
             <div id="extraLinks"></div>
-            <button id="nextButton" class="next-button" onclick="nextQuestion()">Nästa fråga →</button>
+
+            <button id="nextButton"
+                    class="next-button"
+                    onclick="nextQuestion()">
+                Nästa fråga →
+            </button>
         </div>
     </section>
 
+    <!-- Resultatskärm -->
     <section id="resultScreen" class="hidden">
         <h1>🎉 Du har klarat quizet!</h1>
-        <img class="screen-image" src="glad.jpg" alt="Bra jobbat">
+
+        <img class="screen-image"
+             src="glad.jpg"
+             alt="Bra jobbat">
+
         <div id="resultScore" class="result-score"></div>
         <div id="resultMessage" class="result-panel"></div>
 
         <h2>Vill du fortsätta träna?</h2>
-        <p>Här kan du testa fler saker och fundera vidare över vad som är sant på nätet.</p>
 
-        <button class="main-button" onclick="showPersonPage()">Titta på Ulf-bilderna</button>
-        <button class="secondary-button" onclick="showQuizPage()">Testa SVT:s AI-quiz</button>
-        <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
+        <p>
+            Här kan du testa fler saker och fundera vidare över
+            vad som är sant på nätet.
+        </p>
+
+        <button class="main-button" onclick="showPersonPage()">
+            Titta på Ulf-bilderna
+        </button>
+
+        <button class="secondary-button" onclick="showQuizPage()">
+            Testa SVT:s AI-quiz
+        </button>
+
+        <button class="secondary-button" onclick="restartQuiz()">
+            Spela igen
+        </button>
     </section>
 
+    <!-- Bildskärm -->
     <section id="personScreen" class="hidden">
         <h1>Vad ser du?</h1>
-        <p>Titta noga på bilden. Kan du upptäcka detaljer som hjälper dig att avgöra vad du ser?</p>
 
-        <img id="personImage" class="screen-image" src="ulfk2.jpg" alt="Bild på Ulf">
+        <p>
+            Titta noga på bilden. Kan du upptäcka detaljer som hjälper
+            dig att avgöra vad du ser?
+        </p>
+
+        <img id="personImage"
+             class="screen-image"
+             src="ulfk2.jpg"
+             alt="Bild på Ulf">
+
         <p id="personCaption">Bild 1</p>
 
-        <button class="main-button" onclick="showSecondImage()">Visa nästa bild</button>
-        <button class="secondary-button" onclick="showResultPage()">Tillbaka till resultatet</button>
+        <button class="main-button" onclick="showSecondImage()">
+            Visa nästa bild
+        </button>
+
+        <button class="secondary-button" onclick="showResultPage()">
+            Tillbaka till resultatet
+        </button>
     </section>
 
+    <!-- Länk till SVT:s quiz -->
     <section id="quizLinkScreen" class="hidden">
         <h1>Kan du skilja AI från verkligheten?</h1>
-        <img class="screen-image" src="quiz1.jpg" alt="SVT:s quiz om AI-bilder och videor">
 
-        <p>SVT har ett quiz där du får testa om du kan skilja AI-genererade videor från verkliga videor.</p>
+        <img class="screen-image"
+             src="quiz1.jpg"
+             alt="SVT:s quiz om AI-bilder och videor">
+
+        <p>
+            SVT har ett quiz där du får testa om du kan skilja
+            AI-genererade videor från verkliga videor.
+        </p>
 
         <p>
             <a href="https://www.svt.se/special/kan-du-skilja-pa-en-ai-video-och-en-riktig/"
-               target="_blank" rel="noopener noreferrer">
+               target="_blank"
+               rel="noopener noreferrer">
                 Öppna SVT:s AI-quiz
             </a>
         </p>
 
-        <button class="main-button" onclick="showResultPage()">Tillbaka till resultatet</button>
-        <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
+        <button class="main-button" onclick="showResultPage()">
+            Tillbaka till resultatet
+        </button>
+
+        <button class="secondary-button" onclick="restartQuiz()">
+            Spela igen
+        </button>
     </section>
 
+    <!-- Nyhetskällor -->
     <section id="newsScreen" class="hidden">
         <h1>Jämför flera nyhetskällor</h1>
-        <p>Om du undrar om en nyhet stämmer kan du undersöka vad flera etablerade nyhetskällor skriver.</p>
+
+        <p>
+            Om du undrar om en nyhet stämmer kan du undersöka vad
+            flera etablerade nyhetskällor skriver.
+        </p>
 
         <div class="link-list">
-            <a class="news-link" href="https://www.svt.se/" target="_blank" rel="noopener noreferrer">
+            <a class="news-link"
+               href="https://www.svt.se/"
+               target="_blank"
+               rel="noopener noreferrer">
                 <img src="svt.jpg" alt="SVT">
             </a>
 
-            <a class="news-link" href="https://sverigesradio.se/" target="_blank" rel="noopener noreferrer">
+            <a class="news-link"
+               href="https://sverigesradio.se/"
+               target="_blank"
+               rel="noopener noreferrer">
                 <img src="sr.jpg" alt="Sveriges Radio">
             </a>
 
-            <a class="news-link" href="https://www.dn.se/" target="_blank" rel="noopener noreferrer">
+            <a class="news-link"
+               href="https://www.dn.se/"
+               target="_blank"
+               rel="noopener noreferrer">
                 <img src="dn.jpg" alt="Dagens Nyheter">
             </a>
 
-            <a class="news-link" href="https://www.bbc.com/news" target="_blank" rel="noopener noreferrer">
+            <a class="news-link"
+               href="https://www.bbc.com/news"
+               target="_blank"
+               rel="noopener noreferrer">
                 <img src="bbc.jpg" alt="BBC News">
             </a>
 
-            <a class="news-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
+            <a class="news-link"
+               href="https://www.google.com/"
+               target="_blank"
+               rel="noopener noreferrer">
                 <img src="google.jpg" alt="Google">
             </a>
         </div>
 
-        <p class="small-note">Tänk på att även etablerade källor kan behöva kompletteras med mer information.</p>
-        <button class="main-button" onclick="returnToQuestion()">Tillbaka till frågan</button>
+        <p class="small-note">
+            Tänk på att även etablerade källor kan behöva kompletteras
+            med mer information.
+        </p>
+
+        <button class="main-button" onclick="returnToQuestion()">
+            Tillbaka till frågan
+        </button>
     </section>
 
 </div>
 
+<!-- Ljud -->
 <audio id="applauseSound" src="applaus.wav" preload="auto"></audio>
 <audio id="booSound" src="bu.wav" preload="auto"></audio>
 
 <script>
-
 const questions = [
 
     {
@@ -548,56 +627,37 @@ const questions = [
             "Om en sida ser proffsig ut kan jag lita på den."
         ],
         correct: 2,
-        explanation: `Google visar många olika sidor. Vissa är annonser. Andra kan ha fel information.
-Det går inte att lita på en sida bara för att den ligger först eller ser snygg ut.
-
-Fundera vidare på:
-
-Vem har skrivit det här?
-Står det samma sak på andra sidor jag litar på?`
+        explanation: "Google visar många olika sidor. Vissa är annonser. Andra kan ha fel information. Det går inte att lita på en sida bara för att den ligger först eller ser snygg ut. \nFundera vidare på:\n• Vem har skrivit det här?\n• Står det samma sak på andra sidor jag litar på?"
     },
 
     {
         question: "En AI-chattbot ger dig ett svar. Kan du alltid lita på att svaret är rätt?",
         image: "ai.jpg",
         options: [
-            "Ja, AI hämtar alltid information från säkra källor.",
-            "Ja, om svaret låter trovärdigt.",
+            "Ja, AI hämtar alltid bara verifierade fakta.",
+            "Ja, om svaret är välformulerat.",
             "Nej, AI kan ibland hitta på fakta eller ge felaktiga svar.",
-            "Ja, om man använder en välkänd AI-tjänst."
+            "Ja, om svaret kommer snabbt."
         ],
         correct: 2,
-        explanation: `AI kan låta säker även när den har fel. Kontrollera viktiga uppgifter mot tillförlitliga källor, särskilt när det gäller hälsa, pengar eller skolarbete.
-
-Fundera vidare på:
-
-Vad kan du göra om du är osäker på om AI säger sanningen?
-Vem kan du fråga om du vill veta om ett svar från AI stämmer?`
+        explanation: "AI kan låta säker även när den har fel. Kontrollera viktiga uppgifter mot tillförlitliga källor, särskilt när det gäller hälsa, pengar eller skolarbete."
     },
-
 
     {
         question: "Någon publicerar en bild på dig på nätet. Kan du alltid få bort den helt genom att be personen radera den?",
         image: "ungdomar.jpg",
         options: [
-            "Ja, personen kan alltid ta bort bilden från hela internet.",
+            "Ja, alla kopior försvinner automatiskt.",
             "Ja, om personen tar bort originalbilden.",
-            "Nej, när en bild väl finns på nätet kan ingen ta bort den.",
+            "Ja, bilder sparas aldrig av andra.",
             "Nej, andra kan redan ha sparat eller delat bilden vidare."
         ],
         correct: 3,
-        explanation: `En bild kan kopieras, skärmdumpas och spridas vidare.
-Därför är det klokt att tänka efter innan man publicerar bilder.
-Om någon sprider en bild mot din vilja kan du be om hjälp att få den borttagen.
-
-Fundera vidare på:
-
-Vad kan hända med en bild efter att du har publicerat den på nätet?
-Varför är det viktigt att fråga innan man publicerar bilder på andra?`
+        explanation: "En bild kan kopieras, skärmdumpas och spridas vidare. Därför är det klokt att tänka efter innan man publicerar bilder. Om någon sprider en bild mot din vilja kan du be om hjälp att få den borttagen."
     },
 
     {
-       question: "Du ser en dramatisk nyhet i sociala medier. Vad är bäst att göra innan du tror på den eller delar den?",
+        question: "Du ser en dramatisk nyhet i sociala medier. Vad är bäst att göra innan du tror på den eller delar den?",
         image: "nyheter.jpg",
         options: [
             "Dela den snabbt så att andra får veta.",
@@ -606,12 +666,7 @@ Varför är det viktigt att fråga innan man publicerar bilder på andra?`
             "Lita på den om bilden ser äkta ut."
         ],
         correct: 1,
-        explanation: `Jämför nyheten med flera oberoende och trovärdiga källor. Kontrollera vem som publicerat den, när den publicerades och om andra seriösa medier rapporterar samma sak.
-
-Fundera vidare på:
-
-Vad kan hända om du delar en nyhet som inte är sann?
-Hur kan du ta reda på om en nyhet går att lita på?`,
+        explanation: "Jämför nyheten med flera oberoende och trovärdiga källor. Kontrollera vem som publicerat den, när den publicerades och om andra seriösa medier rapporterar samma sak.",
         newsLinks: true
     },
 
@@ -625,12 +680,20 @@ Hur kan du ta reda på om en nyhet går att lita på?`,
             "Kontrollerar själv i Swish att betalningen verkligen kommit in och kontaktar plattformen eller banken om något verkar fel."
         ],
         correct: 3,
-        explanation: `Lita inte enbart på köparens meddelande eller en skärmdump. Kontrollera själv i din bank eller Swish om pengarna verkligen kommit in. Om något verkar misstänkt ska du inte skicka pengar vidare.
+        explanation: "Lita inte enbart på köparens meddelande eller en skärmdump. Kontrollera själv i din bank eller Swish om pengarna verkligen kommit in. Om något verkar misstänkt ska du inte skicka pengar vidare."
+    },
 
-Fundera vidare på:
-
-Vad kan du göra om köparen stressar dig att swisha tillbaka pengarna snabbt?
-Vem kan du be om hjälp om du misstänker att någon försöker lura dig på nätet?`
+    {
+        question: "Du får en sexsiffrig kod från Snapchat. Direkt efter skriver en kompis: ”Oj, jag skrev fel nummer, kan du skicka koden till mig?” Vad gör du?",
+        image: "luras.jpg",
+        options: [
+            "Skickar koden eftersom det är en kompis.",
+            "Skickar halva koden så att det känns säkrare.",
+            "Frågar varför kompisen behöver koden och skickar den om svaret verkar rimligt.",
+            "Skickar inte koden och kontrollerar att mitt konto är säkert."
+        ],
+        correct: 3,
+        explanation: "En inloggningskod är till för dig och ska aldrig delas med någon annan. Någon kan försöka ta över ditt konto. Även en kompis konto kan ha blivit kapat, så kontakta personen på ett annat sätt om du är osäker."
     },
 
     {
@@ -643,12 +706,7 @@ Vem kan du be om hjälp om du misstänker att någon försöker lura dig på nä
             "Frågar efter hans mellannamn och swishar om han svarar rätt."
         ],
         correct: 2,
-        explanation: `AI kan användas för att härma en persons röst. Brådska och krav på pengar är varningssignaler. Lägg på och ring personen på ett nummer du redan känner till innan du gör något.
-
-Fundera vidare på:
-
-Kan du alltid lita på att det är rätt person som ringer, även om rösten låter bekant?
-Vad kan du göra om du redan har skickat pengar och sedan misstänker att du blivit lurad?`
+        explanation: "AI kan användas för att härma en persons röst. Brådska och krav på pengar är varningssignaler. Lägg på och ring personen på ett nummer du redan känner till innan du gör något."
     },
 
     {
@@ -661,12 +719,7 @@ Vad kan du göra om du redan har skickat pengar och sedan misstänker att du bli
             "Det är alltid ett misstag i prissättningen."
         ],
         correct: 0,
-        explanation: `Ett orimligt lågt pris tillsammans med tidspress kan vara tecken på en bluff. Kontrollera webbutikens namn, kontaktuppgifter och oberoende omdömen innan du handlar. Klicka inte vidare eller betala bara för att erbjudandet verkar brådskande.
-
-Fundera vidare på:
-
-Hur känns det när du tror att du missar ett erbjudande?
-Vad kan du kontrollera innan du handlar från en webbutik du inte känner till?`
+        explanation: "Ett orimligt lågt pris tillsammans med tidspress kan vara tecken på en bluff. Kontrollera webbutikens namn, kontaktuppgifter och oberoende omdömen innan du handlar. Klicka inte vidare eller betala bara för att erbjudandet verkar brådskande."
     },
 
     {
@@ -679,12 +732,33 @@ Vad kan du kontrollera innan du handlar från en webbutik du inte känner till?`
             "Att flera konton har få inlägg, märkliga namn och nästan identiska kommentarer."
         ],
         correct: 3,
-        explanation: `Bedragare kan använda falska konton och kommentarer för att få ett erbjudande att verka trovärdigt. Många kommentarer eller en känd persons bild bevisar inte att något är äkta.
+        explanation: "Bedragare kan använda falska konton och kommentarer för att få ett erbjudande att verka trovärdigt. Många kommentarer eller en känd persons bild bevisar inte att något är äkta."
+    },
 
-Fundera vidare på:
+    {
+        question: "På Discord står det ”Gratis Nitro! Skanna den här QR-koden i appen”. Vad kan risken vara?",
+        image: "luras.jpg",
+        options: [
+            "Du får automatiskt gratis Nitro.",
+            "Någon kan få tillgång till ditt konto genom att lura dig att logga in.",
+            "Det händer ingenting när man skannar QR-koder.",
+            "Discord uppdaterar bara appen."
+        ],
+        correct: 1,
+        explanation: "QR-koder kan leda till falska inloggningssidor eller användas i försök att ta över konton. Skanna inte okända koder för att få gratis förmåner. Gå i stället till tjänstens officiella app eller webbplats."
+    },
 
-Vad kan du göra om du är osäker på om ett konto är äkta?
-Varför kan du inte lita på positiva kommentarer?`
+    {
+        question: "En kompis konto delar en video med texten ”Skolan är stängd i morgon, dela vidare!”. Vad är bäst att göra först?",
+        image: "luras.jpg",
+        options: [
+            "Dela videon direkt så att alla får veta.",
+            "Kontrollera hur många gilla-markeringar den har.",
+            "Kontrollera skolans officiella information eller fråga en lärare.",
+            "Fråga i klasschatten och tro på det om flera håller med."
+        ],
+        correct: 2,
+        explanation: "Kontrollera informationen hos någon som faktiskt ansvarar för beskedet, till exempel skolan. Många gilla-markeringar eller upprepade meddelanden gör inte automatiskt ett påstående sant."
     },
 
     {
@@ -697,30 +771,33 @@ Varför kan du inte lita på positiva kommentarer?`
             "Fråga en kompis om bilden ser verklig ut."
         ],
         correct: 0,
-        explanation: `Med en omvänd bildsökning kan du ibland hitta bildens ursprung och se om den är gammal, manipulerad eller hämtad från en annan händelse. Jämför också med trovärdiga nyhetskällor.
-
-Fundera vidare på:
-
-Varför kan någon vilja sprida en gammal bild som om den vore ny?
-Vad kan hända om människor delar en falsk bild utan att kontrollera den?`
+        explanation: "Med en omvänd bildsökning kan du ibland hitta bildens ursprung och se om den är gammal, manipulerad eller hämtad från en annan händelse. Jämför också med trovärdiga nyhetskällor."
     },
 
     {
-        question: "Du frågar en AI-chattbot om en bok som handlar om hundar. AI tipsar om en bok med titel och författare. Vad gör du?",
+        question: "Någon i ett spel erbjuder dig ett sällsynt föremål om du byter bort tre andra. Personen skickar en länk till en särskild handelssida. Vad är risken?",
+        image: "luras.jpg",
+        options: [
+            "Du blir automatiskt avstängd från spelet.",
+            "Föremålen blir sämre efter bytet.",
+            "Det finns ingen risk om personen verkar trevlig.",
+            "Den falska sidan kan stjäla dina inloggningsuppgifter eller föremål."
+        ],
+        correct: 3,
+        explanation: "Falska handelssidor kan se ut som riktiga spelsidor och stjäla konton eller föremål. Genomför byten i spelets officiella system och logga aldrig in via länkar från okända spelare."
+    },
+
+    {
+        question: "Du ber en AI-chattbot om källor till ett skolarbete. Den föreslår tre böcker med författare och titlar. Vad gör du?",
         image: "ai.jpg",
         options: [
-            "Tror på svaret eftersom AI verkar säker.",
-            "Kontrollerar att boken verkligen finns, till exempel på biblioteket.",
-            "Ber AI hitta på fler böcker.",
-            "Tror att boken finns om titeln låter bra."
+            "Använder böckerna direkt eftersom AI har gett exakta titlar.",
+            "Kontrollerar att böckerna verkligen finns, till exempel i bibliotekets katalog.",
+            "Frågar AI om den är säker och litar på svaret.",
+            "Ber AI hitta på ytterligare böcker så att du får fler källor."
         ],
         correct: 1,
-        explanation: `AI kan hitta på boktitlar och författare som låter riktiga. Kontrollera att boken verkligen finns, till exempel i bibliotekets katalog.
-
-Fundera vidare på:
-
-Varför tror du att AI ibland hittar på information som inte stämmer?
-Hur skulle du förklara för en kompis att AI också kan göra misstag?`
+        explanation: "AI kan hitta på boktitlar, författare och källor som låter trovärdiga. Sök efter böckerna i bibliotekets katalog eller hos förlaget innan du hänvisar till dem i ett skolarbete."
     }
 
 ];
@@ -733,7 +810,6 @@ let personImageIndex = 0;
 
 const screenIds = [
     "startScreen",
-    "introScreen",
     "gameScreen",
     "resultScreen",
     "personScreen",
@@ -750,14 +826,11 @@ function showScreen(screenId) {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function showIntroduction() {
-    showScreen("introScreen");
-}
-
 function startGame() {
     currentQuestion = 0;
     score = 0;
     answered = false;
+
     showScreen("gameScreen");
     showQuestion();
 }
@@ -792,6 +865,7 @@ function showQuestion() {
 
     q.options.forEach((option, index) => {
         const button = document.createElement("button");
+
         button.type = "button";
         button.className = "answer-button";
 
@@ -802,6 +876,7 @@ function showQuestion() {
 
         button.querySelector("span:last-child").textContent = option;
         button.addEventListener("click", () => answer(index));
+
         optionsContainer.appendChild(button);
     });
 
@@ -821,7 +896,6 @@ function playSound(soundId) {
 
     try {
         sound.currentTime = 0;
-
         const playPromise = sound.play();
 
         if (playPromise && typeof playPromise.catch === "function") {
@@ -893,49 +967,24 @@ function answer(selectedIndex) {
 
     const heading = document.createElement("span");
     heading.className = "feedback-heading";
-    heading.textContent = "💡 Så här ligger det till!";
-
-    explanation.appendChild(heading);
-
-    // Dela upp förklaringen och reflektionsfrågorna.
-    const parts = q.explanation.split(/Fundera vidare på:/i);
+    heading.textContent = "💡 Så här ligger det till";
 
     const explanationText = document.createElement("div");
-    explanationText.textContent = parts[0].trim();
+    explanationText.textContent = q.explanation;
+
+    explanation.appendChild(heading);
     explanation.appendChild(explanationText);
-
-    // Visa blå rubrik och punktlista om frågan har reflektionsfrågor.
-    if (parts.length > 1) {
-        const reflectionHeading = document.createElement("span");
-        reflectionHeading.className = "reflection-heading";
-        reflectionHeading.textContent = "Fundera vidare på:";
-        explanation.appendChild(reflectionHeading);
-
-        const reflectionList = document.createElement("ul");
-        reflectionList.className = "reflection-list";
-
-        const reflectionQuestions = parts[1]
-            .split("\n")
-            .map(line => line.trim())
-            .filter(line => line.length > 0);
-
-        reflectionQuestions.forEach(question => {
-            const item = document.createElement("li");
-            item.textContent = question;
-            reflectionList.appendChild(item);
-        });
-
-        explanation.appendChild(reflectionList);
-    }
 
     const extraLinks = document.getElementById("extraLinks");
     extraLinks.innerHTML = "";
 
     if (q.newsLinks) {
         const newsButton = document.createElement("button");
+
         newsButton.className = "secondary-button";
         newsButton.textContent = "Visa nyhetskällor";
         newsButton.addEventListener("click", openNews);
+
         extraLinks.appendChild(newsButton);
     }
 
@@ -950,7 +999,10 @@ function answer(selectedIndex) {
     result.setAttribute("tabindex", "-1");
     result.focus({ preventScroll: true });
 
-    feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    feedback.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
 }
 
 function nextQuestion() {
@@ -976,19 +1028,23 @@ function showResultPage() {
     let message;
 
     if (score >= 12) {
-        message = "<h2>Fantastiskt detektivarbete!</h2>" +
+        message =
+            "<h2>Fantastiskt detektivarbete!</h2>" +
             "<p>Du verkar vara bra på att upptäcka varningssignaler. Fortsätt att vara nyfiken och kontrollera information.</p>";
 
     } else if (score >= 9) {
-        message = "<h2>Mycket bra jobbat!</h2>" +
+        message =
+            "<h2>Mycket bra jobbat!</h2>" +
             "<p>Du har många bra strategier för att upptäcka bluffar och falsk information. Fortsätt öva på att kontrollera källor.</p>";
 
     } else if (score >= 6) {
-        message = "<h2>Bra jobbat!</h2>" +
+        message =
+            "<h2>Bra jobbat!</h2>" +
             "<p>Du har redan flera användbara kunskaper. Kom ihåg att stanna upp och kontrollera när något verkar för bra eller brådskande för att vara sant.</p>";
 
     } else {
-        message = "<h2>Här finns mycket att lära!</h2>" +
+        message =
+            "<h2>Här finns mycket att lära!</h2>" +
             "<p>Nu har du fått tips om vad du kan vara uppmärksam på. Det viktigaste är att våga stanna upp, kontrollera och fråga någon om hjälp när något känns osäkert.</p>";
     }
 
@@ -1000,6 +1056,7 @@ function restartQuiz() {
     currentQuestion = 0;
     score = 0;
     answered = false;
+
     showScreen("startScreen");
 }
 
@@ -1014,6 +1071,7 @@ function returnToQuestion() {
 
 function showPersonPage() {
     personImageIndex = 0;
+
     showScreen("personScreen");
     showPersonImage();
 }
@@ -1037,6 +1095,7 @@ function showPersonImage() {
 
     img.onerror = function () {
         this.style.display = "none";
+
         caption.textContent =
             "Bilden kunde inte visas. Kontrollera att bildfilen finns kvar.";
     };
@@ -1047,7 +1106,6 @@ function showPersonImage() {
 function showQuizPage() {
     showScreen("quizLinkScreen");
 }
-
 </script>
 
 </body>
