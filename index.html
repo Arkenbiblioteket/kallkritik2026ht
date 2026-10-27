@@ -68,6 +68,17 @@ p {
     border-radius: 12px;
 }
 
+.question-image-group {
+    width: 100%;
+    max-width: 600px;
+    margin: 15px auto;
+}
+
+.question-image-group img {
+    border-radius: 12px;
+    object-fit: contain;
+}
+
 button { font-family: inherit; }
 
 .main-button,
@@ -470,6 +481,7 @@ button { font-family: inherit; }
         <div id="progressText" class="progress-text"></div>
         <div id="scoreText" class="score-line"></div>
         <img id="questionImage" class="question-image" src="luras.jpg" alt="Bild till frågan">
+        <div id="questionImageGroup" class="question-image-group hidden"></div>
         <div id="questionText" class="question-text"></div>
         <div id="answerOptions" class="answer-options"></div>
 
@@ -704,17 +716,23 @@ Varför kan du inte lita på positiva kommentarer?`
     },
     {
         question: "Du ser en bild av en haj som simmar på en översvämmad gata. Hur kan du bäst undersöka om bilden är äkta och aktuell?",
-<div style="display: flex; gap: 10px;">
-  <img src="haj.jpg" alt="Haj 1" style="width: 50%; height: auto;">
-  <img src="haj2.jpg" alt="Haj 2" style="width: 50%; height: auto;">
-</div>
+
+        image: `
+            <div style="display: flex; gap: 10px;">
+                <img src="haj.jpg" alt="Haj 1" style="width: 50%; height: auto;">
+                <img src="haj2.jpg" alt="Haj 2" style="width: 50%; height: auto;">
+            </div>
+        `,
+
         options: [
             "Göra en omvänd bildsökning och se var bilden tidigare har publicerats.",
             "Titta om bilden är skarp.",
             "Räkna hur många gånger den har delats.",
             "Fråga en kompis om bilden ser verklig ut."
         ],
+
         correct: 0,
+
         explanation: `Med en omvänd bildsökning kan du ibland hitta bildens ursprung och se om den är gammal, manipulerad eller hämtad från en annan händelse. Jämför också med trovärdiga nyhetskällor.
 
 Fundera vidare på:
@@ -811,13 +829,26 @@ function showQuestion() {
     document.getElementById("questionText").textContent = q.question;
 
     const questionImage = document.getElementById("questionImage");
-    questionImage.src = q.image;
-    questionImage.alt = "Bild till fråga " + (currentQuestion + 1);
-    questionImage.style.display = "block";
+    const imageGroup = document.getElementById("questionImageGroup");
 
-    questionImage.onerror = function () {
-        this.style.display = "none";
-    };
+    if (q.image.trim().startsWith("<")) {
+        // Frågan har flera bilder inlagda som HTML (t.ex. hajfrågan)
+        imageGroup.innerHTML = q.image;
+        imageGroup.classList.remove("hidden");
+        questionImage.onerror = null;
+        questionImage.style.display = "none";
+    } else {
+        // Vanlig fråga med ett filnamn
+        imageGroup.innerHTML = "";
+        imageGroup.classList.add("hidden");
+        questionImage.src = q.image;
+        questionImage.alt = "Bild till fråga " + (currentQuestion + 1);
+        questionImage.style.display = "block";
+
+        questionImage.onerror = function () {
+            this.style.display = "none";
+        };
+    }
 
     const optionsContainer = document.getElementById("answerOptions");
     optionsContainer.innerHTML = "";
