@@ -62,7 +62,7 @@ p {
     display: block;
     width: 100%;
     max-width: 800px;
-    max-height: 500px;
+    max-height: min(500px, 40vh);
     object-fit: contain;
     margin: 15px auto;
     border-radius: 12px;
@@ -70,7 +70,7 @@ p {
 
 .question-image.big {
     max-width: 1000px;
-    max-height: 700px;
+    max-height: min(700px, 45vh);
 }
 
 .question-image-group {
@@ -157,17 +157,19 @@ button { font-family: inherit; }
 
 .answer-options {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin: 20px 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 16px 0;
 }
 
 .answer-button {
     white-space: pre-line;
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    text-align: left;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: center;
     padding: 16px;
     min-height: 76px;
     border: 2px solid #c9deec;
@@ -415,7 +417,7 @@ button { font-family: inherit; }
 
     .answer-button {
         font-size: 1.3rem;
-        min-height: 100px;
+        min-height: 110px;
         padding: 20px 22px;
     }
 
@@ -445,12 +447,12 @@ button { font-family: inherit; }
 
     .question-image {
         max-width: 1100px;
-        max-height: 650px;
+        max-height: min(650px, 40vh);
     }
 
     .question-image.big {
         max-width: 1300px;
-        max-height: 800px;
+        max-height: min(800px, 45vh);
     }
 
     .question-image-group { max-width: 1200px; }
@@ -488,6 +490,9 @@ button { font-family: inherit; }
     }
 
     .answer-button {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
         min-height: 65px;
         padding: 13px;
     }
@@ -654,7 +659,8 @@ const questions = [
             "Google har kollat att allt är sant."
         ],
         correct: 1,
-        explanation: `Google visar många sidor. Vissa är annonser och vissa har fel information. Det första svaret är inte alltid det bästa.`
+        explanation: `Google visar många sidor. Vissa är annonser och vissa har fel information. Det första svaret är inte alltid det bästa.
+Stanna. Kolla. Fråga någon.`
     },
     {
         question: "Kan du alltid lita på svaret från en AI-chatt?",
@@ -665,7 +671,8 @@ const questions = [
             "Nej, AI kan hitta på saker."
         ],
         correct: 2,
-        explanation: `AI kan låta säker fast den har fel. Kolla viktiga saker på en sida du litar på eller fråga en vuxen.`
+        explanation: `AI kan låta säker fast den har fel. Kolla viktiga saker på en sida du litar på eller fråga en vuxen.
+Stanna. Kolla. Fråga någon.`
     },
     {
         question: "Någon lägger ut en bild på dig på nätet. Går det alltid att ta bort bilden helt?",
@@ -688,7 +695,8 @@ Om du blir ledsen över en bild, berätta för en vuxen.`
             "Jag kollar om flera sidor jag litar på skriver samma sak."
         ],
         correct: 2,
-        explanation: `Falska nyheter sprids snabbt. Kolla om till exempel SVT, SR eller DN skriver samma sak innan du tror på den eller delar den.`,
+        explanation: `Falska nyheter sprids snabbt. Kolla om till exempel SVT, SR eller DN skriver samma sak innan du tror på den eller delar den.
+Stanna. Kolla. Fråga någon.`,
         newsLinks: true
     },
     {
@@ -700,7 +708,8 @@ Om du blir ledsen över en bild, berätta för en vuxen.`
             "Jag tittar på en skärmdump som köparen skickar."
         ],
         correct: 0,
-        explanation: `Bluffare skickar ofta falska skärmdumpar. Kolla alltid själv i din bank eller Swish. Swisha inte tillbaka om något känns konstigt.`
+        explanation: `Bluffare skickar ofta falska skärmdumpar. Kolla alltid själv i din bank eller Swish. Swisha inte tillbaka om något känns konstigt.
+Stanna. Kolla. Fråga någon.`
     },
     {
         question: "Ett okänt nummer ringer. Rösten låter som din kompis. Hen vill att du swishar pengar direkt. Vad gör du?",
@@ -711,7 +720,8 @@ Om du blir ledsen över en bild, berätta för en vuxen.`
             "Jag lägger på och ringer kompisen på det vanliga numret."
         ],
         correct: 2,
-        explanation: `AI kan härma en röst. Bluffare har ofta bråttom och vill ha pengar snabbt. Lägg på och ring numret du redan har.`
+        explanation: `AI kan härma en röst. Bluffare har ofta bråttom och vill ha pengar snabbt. Lägg på och ring numret du redan har.
+Stanna. Kolla. Fråga någon.`
     },
     {
         question: "Du ser en annons med märkesskor för 299 kr. De kostar annars 5 000 kr. Det står: ”Bara i dag! Tre par kvar!” Vad kan det vara?",
@@ -722,7 +732,8 @@ Om du blir ledsen över en bild, berätta för en vuxen.`
             "Ett fel i priset. Jag köper direkt."
         ],
         correct: 1,
-        explanation: `Ett jättelågt pris och bråttom är varningstecken. Sök på butikens namn och läs vad andra säger, till exempel på se.trustpilot.com. Fråga en vuxen innan du betalar.`
+        explanation: `Ett jättelågt pris och bråttom är varningstecken. Sök på butikens namn och läs vad andra säger, till exempel på se.trustpilot.com. Fråga en vuxen innan du betalar.
+Stanna. Kolla. Fråga någon.`
     },
     {
         question: "Du ser en bild på en haj på en översvämmad gata. Hur kollar du om den är äkta?",
@@ -742,7 +753,8 @@ Om du blir ledsen över en bild, berätta för en vuxen.`
 
         correct: 0,
 
-        explanation: `En bildsökning kan visa var bilden kommer ifrån och om den är gammal eller ändrad. Kolla också om SVT, SR eller DN har skrivit om det.`
+        explanation: `En bildsökning kan visa var bilden kommer ifrån och om den är gammal eller ändrad. Kolla också om SVT, SR eller DN har skrivit om det.
+Stanna. Kolla. Fråga någon.`
     },
     {
         question: "Du frågar en AI om en bok om hundar. AI tipsar om en bok med titel och författare. Vad gör du?",
@@ -753,7 +765,8 @@ Om du blir ledsen över en bild, berätta för en vuxen.`
             "Jag tror att boken finns om titeln låter bra."
         ],
         correct: 0,
-        explanation: `AI kan hitta på böcker som låter riktiga. Sök i bibliotekets katalog eller fråga bibliotekarien.`
+        explanation: `AI kan hitta på böcker som låter riktiga. Sök i bibliotekets katalog eller fråga bibliotekarien.
+Stanna. Kolla. Fråga någon.`
     }
 ];
 
