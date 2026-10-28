@@ -24,10 +24,10 @@ body {
 
 .container {
     width: 100%;
-    max-width: 900px;
+    max-width: min(1400px, 92vw);
     background: #ffffff;
     border-radius: 22px;
-    padding: 28px;
+    padding: clamp(28px, 3vw, 48px);
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
     text-align: center;
 }
@@ -401,6 +401,66 @@ button { font-family: inherit; }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ---------- Större skärmar (storbildsskärm) ---------- */
+
+@media (min-width: 1200px) {
+    p { font-size: 1.3rem; }
+
+    .question-text { font-size: 1.9rem; }
+
+    .answer-button {
+        font-size: 1.3rem;
+        min-height: 100px;
+        padding: 20px 22px;
+    }
+
+    .answer-letter {
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .main-button,
+    .next-button,
+    .secondary-button {
+        font-size: 1.3rem;
+        padding: 16px 32px;
+    }
+
+    .feedback-explanation { font-size: 1.3rem; }
+    .feedback-result { font-size: 1.6rem; }
+    .progress-text,
+    .score-line { font-size: 1.15rem; }
+
+    .screen-image {
+        max-width: 700px;
+        max-height: 420px;
+    }
+
+    .question-image {
+        max-width: 620px;
+        max-height: 360px;
+    }
+
+    .question-image-group { max-width: 850px; }
+
+    .feedback-image {
+        max-width: 240px;
+        max-height: 200px;
+    }
+
+    .compare-image { max-height: 520px; }
+    .compare-caption { font-size: 1.3rem; }
+
+    .link-list { max-width: 900px; }
+    .news-link { min-height: 100px; }
+    .news-link img {
+        max-width: 140px;
+        max-height: 60px;
+    }
+}
+
 @media (max-width: 620px) {
     body {
         padding: 10px;
@@ -684,7 +744,7 @@ Vad kan du göra om du redan har skickat pengar och sedan misstänker att du bli
         question: "Du ser en annons på Instagram för märkesskor för 299 kronor. De brukar kosta 5 000 kronor. Det står ”Bara i dag – endast tre par kvar!”. Vad bör du misstänka?",
         image: "luras.jpg",
         options: [
-            "Det kan vara en falsk webbutik som tar betalt utan att skicka några skor. Sök på butikens namn i trustpilot.com för att få se vad andra tycker om butiken.",
+            "Det kan vara en falsk webbutik som tar betalt utan att skicka några skor. Sök på butikens namn i se.trustpilot.com för att få se vad andra tycker om butiken.",
             "Butikens webbplats ser proffsig ut. Jag vill gärna ha skorna och skyndar mig att beställa. Vilket fynd!",
             "Skorna måste vara begagnade, men de ser fina ut så jag köper direkt.",
             "Det måste ett misstag i prissättningen bara."
