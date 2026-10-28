@@ -51,8 +51,8 @@ p {
 .screen-image {
     display: block;
     width: 100%;
-    max-width: 500px;
-    max-height: 300px;
+    max-width: 700px;
+    max-height: 420px;
     object-fit: contain;
     margin: 15px auto;
     border-radius: 14px;
@@ -61,16 +61,21 @@ p {
 .question-image {
     display: block;
     width: 100%;
-    max-width: 440px;
-    max-height: 260px;
+    max-width: 800px;
+    max-height: 500px;
     object-fit: contain;
     margin: 15px auto;
     border-radius: 12px;
 }
 
+.question-image.big {
+    max-width: 1000px;
+    max-height: 700px;
+}
+
 .question-image-group {
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     margin: 15px auto;
 }
 
@@ -434,16 +439,21 @@ button { font-family: inherit; }
     .score-line { font-size: 1.15rem; }
 
     .screen-image {
-        max-width: 700px;
-        max-height: 420px;
+        max-width: 900px;
+        max-height: 560px;
     }
 
     .question-image {
-        max-width: 620px;
-        max-height: 360px;
+        max-width: 1100px;
+        max-height: 650px;
     }
 
-    .question-image-group { max-width: 850px; }
+    .question-image.big {
+        max-width: 1300px;
+        max-height: 800px;
+    }
+
+    .question-image-group { max-width: 1200px; }
 
     .feedback-image {
         max-width: 240px;
@@ -527,7 +537,7 @@ button { font-family: inherit; }
     <section id="introScreen" class="hidden">
         <h1>Välkommen till Tänk ett varv till!</h1>
         <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet">
-        <p>Du får 9 frågor med fyra svarsalternativ. Välj det svar du tycker är bäst.</p>
+        <p>Du får 10 frågor med fyra svarsalternativ. Välj det svar du tycker är bäst.</p>
         <p>Efter varje svar får du veta om det var rätt och läsa en förklaring. Du får en poäng för varje rätt svar.</p>
         <p><strong>Lycka till – och tänk som en detektiv!</strong></p>
         <button class="main-button" onclick="startGame()">Nu kör vi!</button>
@@ -637,6 +647,7 @@ const questions = [
     {
         question: "Du söker efter information på Google. Vilket påstående stämmer bäst?",
         image: "google.jpg",
+        bigImage: true,
         options: [
             "Det första sökresultatet är det som är mest sant.",
             "Google har kollat att allt som visas är rätt.",
@@ -887,6 +898,7 @@ function showQuestion() {
         questionImage.src = q.image;
         questionImage.alt = "Bild till fråga " + (currentQuestion + 1);
         questionImage.style.display = "block";
+        questionImage.classList.toggle("big", !!q.bigImage);
 
         questionImage.onerror = function () {
             this.style.display = "none";
