@@ -157,7 +157,7 @@ button { font-family: inherit; }
 
 .answer-options {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 12px;
     margin: 20px 0;
 }
@@ -537,7 +537,7 @@ button { font-family: inherit; }
     <section id="introScreen" class="hidden">
         <h1>Välkommen till Tänk ett varv till!</h1>
         <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet">
-        <p>Du får 10 frågor med fyra svarsalternativ. Välj det svar du tycker är bäst.</p>
+        <p>Du får 9 frågor med tre svarsalternativ. Välj det svar du tycker är bäst.</p>
         <p>Efter varje svar får du veta om det var rätt och läsa en förklaring. Du får en poäng för varje rätt svar.</p>
         <p><strong>Lycka till – och tänk som en detektiv!</strong></p>
         <button class="main-button" onclick="startGame()">Nu kör vi!</button>
@@ -645,96 +645,93 @@ button { font-family: inherit; }
 <script>
 const questions = [
     {
-        question: "Du söker efter information på Google. Vilket påstående stämmer bäst?",
+        question: "Du söker på Google. Vad stämmer bäst?",
         image: "google.jpg",
         bigImage: true,
         options: [
-            "Det första sökresultatet är det som är mest sant.",
-            "Google har kollat att allt som visas är rätt.",
-            "Vissa sökresultat är annonser eller kan ha fel information.",
-            "Om en sida ser proffsig ut kan jag lita på den."
-        ],
-        correct: 2,
-        explanation: `Google visar många olika sidor. Vissa är annonser. Andra kan ha fel information.
-Det går inte att lita på en sida bara för att den ligger först eller ser snygg ut.`
-    },
-    {
-        question: "En AI-chattbot ger dig ett svar. Kan du alltid lita på att svaret är rätt?",
-        image: "ai.jpg",
-        options: [
-            "Ja, AI hämtar alltid information från säkra källor.",
-            "Ja, om svaret låter trovärdigt.",
-            "Nej, AI kan ibland hitta på fakta eller ge felaktiga svar.",
-            "Ja, om man använder en välkänd AI-tjänst."
-        ],
-        correct: 2,
-        explanation: `AI kan låta säker även när den har fel. Kontrollera viktiga uppgifter mot tillförlitliga källor, särskilt när det gäller hälsa, pengar eller skolarbete.`
-    },
-    {
-        question: "Någon publicerar en bild på dig på nätet. Kan du alltid få bort den helt genom att be personen radera den?",
-        image: "bild.jpg",
-        options: [
-            "Ja, personen kan alltid ta bort bilden från hela internet.",
-            "Ja, om personen tar bort originalbilden.",
-            "Nej, när en bild väl finns på nätet kan ingen ta bort den.",
-            "Nej, andra kan redan ha sparat eller delat bilden vidare."
-        ],
-        correct: 3,
-        explanation: `En bild kan kopieras, skärmdumpas och spridas vidare.
-Därför är det klokt att tänka efter innan man publicerar bilder.
-Om någon sprider en bild mot din vilja kan du be om hjälp att få den borttagen.`
-    },
-    {
-        question: "Du ser en dramatisk nyhet i sociala medier. Vad är bäst att göra innan du tror på den eller delar den?",
-        image: "nyheter.jpg",
-        options: [
-            "Dela den snabbt så att andra får veta.",
-            "Jämför uppgifterna med flera trovärdiga källor.",
-            "Lita på den om många har gillat inlägget.",
-            "Lita på den om bilden ser äkta ut."
+            "Det första svaret är alltid rätt.",
+            "Vissa svar är annonser och kan vara fel.",
+            "Google har kollat att allt är sant."
         ],
         correct: 1,
-        explanation: `Jämför nyheten med flera oberoende och trovärdiga källor. Kontrollera vem som publicerat den, när den publicerades och om andra seriösa medier rapporterar samma sak.`,
+        explanation: `Google visar många sidor. Vissa är annonser och vissa har fel information. Det första svaret är inte alltid det bästa.
+Stanna. Kolla. Fråga någon.`
+    },
+    {
+        question: "Kan du alltid lita på svaret från en AI-chatt?",
+        image: "ai.jpg",
+        options: [
+            "Ja, AI vet alltid rätt.",
+            "Ja, om svaret låter säkert.",
+            "Nej, AI kan hitta på saker."
+        ],
+        correct: 2,
+        explanation: `AI kan låta säker fast den har fel. Kolla viktiga saker på en sida du litar på eller fråga en vuxen.
+Stanna. Kolla. Fråga någon.`
+    },
+    {
+        question: "Någon lägger ut en bild på dig på nätet. Går det alltid att ta bort bilden helt?",
+        image: "bild.jpg",
+        options: [
+            "Ja, det går alltid att ta bort den överallt.",
+            "Nej, andra kan redan ha sparat eller delat den.",
+            "Ja, om personen som la ut den tar bort den."
+        ],
+        correct: 1,
+        explanation: `En bild kan sparas och delas vidare på några sekunder. Tänk efter innan du lägger ut en bild, och fråga alltid först om det är en bild på någon annan.
+Om du blir ledsen över en bild, berätta för en vuxen.`
+    },
+    {
+        question: "Du ser en chockerande nyhet på sociala medier. Vad gör du först?",
+        image: "nyheter.jpg",
+        options: [
+            "Jag delar den direkt så att fler får veta.",
+            "Jag tror på den eftersom många har gillat den.",
+            "Jag kollar om flera sidor jag litar på skriver samma sak."
+        ],
+        correct: 2,
+        explanation: `Falska nyheter sprids snabbt. Kolla om till exempel SVT, SR eller DN skriver samma sak innan du tror på den eller delar den.
+Stanna. Kolla. Fråga någon.`,
         newsLinks: true
     },
     {
-        question: "Du säljer en jacka på Vinted. Köparen skriver att hen har swishat för mycket och ber dig swisha tillbaka mellanskillnaden. Vad gör du?",
+        question: "Du säljer en jacka på Vinted. Köparen säger att hen har swishat för mycket och ber dig swisha tillbaka. Vad gör du?",
         image: "jacka.jpg",
         options: [
-            "Swishar tillbaka direkt eftersom köparen verkar ärlig.",
-            "Ber om en skärmdump på betalningen och swishar sedan tillbaka.",
-            "Swishar tillbaka halva summan för säkerhets skull.",
-            "Kontrollerar själv i Swish att betalningen verkligen kommit in och kontaktar plattformen eller banken om något verkar fel."
-        ],
-        correct: 3,
-        explanation: `Lita inte enbart på köparens meddelande eller en skärmdump. Kontrollera själv i din bank eller Swish om pengarna verkligen kommit in. Om något verkar misstänkt ska du inte skicka pengar vidare.`
-    },
-    {
-        question: "Din kompis ringer från ett okänt nummer. Hen vill att du swishar pengar direkt. Vad gör du?",
-        image: "2500.jpg",
-        options: [
-            "Swishar direkt.",
-            "Ber om numret och swishar när samtalet är slut.",
-            "Lägger på och ringer kompisen på hens vanliga nummer.",
-            "Ber om numret och swishar sedan."
-        ],
-        correct: 2,
-        explanation: `AI kan användas för att härma en persons röst. Brådska och krav på pengar är varningssignaler. Lägg på och ring personen på ett nummer du redan känner till innan du gör något.`
-    },
-    {
-        question: "Du ser en annons på Instagram för märkesskor för 299 kronor. De brukar kosta 5 000 kronor. Det står ”Bara i dag – endast tre par kvar!”. Vad bör du misstänka?",
-        image: "skor.jpg",
-        options: [
-            "Det kan vara en falsk webbutik som tar betalt utan att skicka några skor. Sök på butikens namn i se.trustpilot.com för att få se vad andra tycker om butiken.",
-            "Butikens webbplats ser proffsig ut. Jag vill gärna ha skorna och skyndar mig att beställa. Vilket fynd!",
-            "Skorna måste vara begagnade, men de ser fina ut så jag köper direkt.",
-            "Det måste ett misstag i prissättningen bara."
+            "Jag kollar själv i Swish eller banken om pengarna har kommit.",
+            "Jag swishar tillbaka direkt. Köparen verkar snäll.",
+            "Jag tittar på en skärmdump som köparen skickar."
         ],
         correct: 0,
-        explanation: `Ett orimligt lågt pris tillsammans med tidspress kan vara tecken på en bluff. Kontrollera webbutikens namn, kontaktuppgifter och oberoende omdömen innan du handlar. Klicka inte vidare eller betala bara för att erbjudandet verkar brådskande.`
+        explanation: `Bluffare skickar ofta falska skärmdumpar. Kolla alltid själv i din bank eller Swish. Swisha inte tillbaka om något känns konstigt.
+Stanna. Kolla. Fråga någon.`
     },
     {
-        question: "Du ser en bild av en haj som simmar på en översvämmad gata. Hur kan du bäst undersöka om bilden är äkta och aktuell?",
+        question: "Ett okänt nummer ringer. Rösten låter som din kompis. Hen vill att du swishar pengar direkt. Vad gör du?",
+        image: "2500.jpg",
+        options: [
+            "Jag swishar direkt. Det är ju min kompis.",
+            "Jag ber om numret och swishar efter samtalet.",
+            "Jag lägger på och ringer kompisen på det vanliga numret."
+        ],
+        correct: 2,
+        explanation: `AI kan härma en röst. Bluffare har ofta bråttom och vill ha pengar snabbt. Lägg på och ring numret du redan har.
+Stanna. Kolla. Fråga någon.`
+    },
+    {
+        question: "Du ser en annons med märkesskor för 299 kr. De kostar annars 5 000 kr. Det står: ”Bara i dag! Tre par kvar!” Vad kan det vara?",
+        image: "skor.jpg",
+        options: [
+            "Ett riktigt fynd. Jag måste skynda mig.",
+            "En bluff. Jag kollar butiken innan jag köper.",
+            "Ett fel i priset. Jag köper direkt."
+        ],
+        correct: 1,
+        explanation: `Ett jättelågt pris och bråttom är varningstecken. Sök på butikens namn och läs vad andra säger, till exempel på se.trustpilot.com. Fråga en vuxen innan du betalar.
+Stanna. Kolla. Fråga någon.`
+    },
+    {
+        question: "Du ser en bild på en haj på en översvämmad gata. Hur kollar du om den är äkta?",
 
         image: `
             <div style="display: flex; gap: 10px;">
@@ -744,27 +741,27 @@ Om någon sprider en bild mot din vilja kan du be om hjälp att få den borttage
         `,
 
         options: [
-            "Göra en omvänd bildsökning och se var bilden tidigare har publicerats.",
-            "Titta om bilden är skarp.",
-            "Räkna hur många gånger den har delats.",
-            "Fråga en kompis om bilden ser verklig ut."
+            "Jag söker på bilden för att se var den kommer ifrån.",
+            "Jag kollar om bilden är skarp.",
+            "Jag räknar hur många som har delat den."
         ],
 
         correct: 0,
 
-        explanation: `Med en omvänd bildsökning kan du ibland hitta bildens ursprung och se om den är gammal, manipulerad eller hämtad från en annan händelse. Jämför också med trovärdiga nyhetskällor.`
+        explanation: `En bildsökning kan visa var bilden kommer ifrån och om den är gammal eller ändrad. Kolla också om SVT, SR eller DN har skrivit om det.
+Stanna. Kolla. Fråga någon.`
     },
     {
-        question: "Du frågar en AI-chattbot om en bok som handlar om hundar. AI tipsar om en bok med titel och författare. Vad gör du?",
+        question: "Du frågar en AI om en bok om hundar. AI tipsar om en bok med titel och författare. Vad gör du?",
         image: "hund.jpg",
         options: [
-            "Tror på svaret eftersom AI verkar säker.",
-            "Kontrollerar att boken verkligen finns, till exempel på biblioteket.",
-            "Ber AI hitta på fler böcker.",
-            "Tror att boken finns om titeln låter bra."
+            "Jag kollar att boken finns, till exempel på biblioteket.",
+            "Jag tror på AI. Den låter ju säker.",
+            "Jag tror att boken finns om titeln låter bra."
         ],
-        correct: 1,
-        explanation: `AI kan hitta på boktitlar och författare som låter riktiga. Kontrollera att boken verkligen finns, till exempel i bibliotekets katalog.`
+        correct: 0,
+        explanation: `AI kan hitta på böcker som låter riktiga. Sök i bibliotekets katalog eller fråga bibliotekarien.
+Stanna. Kolla. Fråga någon.`
     }
 ];
 
