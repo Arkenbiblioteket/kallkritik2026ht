@@ -542,7 +542,7 @@ button { font-family: inherit; }
     <section id="introScreen" class="hidden">
         <h1>Välkommen till Tänk ett varv till!</h1>
         <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet">
-        <p>Du får 9 frågor med tre svarsalternativ. Välj det svar du tycker är bäst.</p>
+        <p>Du får åtta frågor med tre svarsalternativ. Välj det svar du tycker är bäst.</p>
         <p>Efter varje svar får du veta om det var rätt och läsa en förklaring. Du får en poäng för varje rätt svar.</p>
         <p><strong>Lycka till – och tänk som en detektiv!</strong></p>
         <button class="main-button" onclick="startGame()">Nu kör vi!</button>
@@ -670,7 +670,7 @@ const questions = [
             "Nej, AI kan hitta på saker."
         ],
         correct: 2,
-        explanation: `AI kan låta säker fast den har fel. Kolla viktiga saker på en sida du litar på eller fråga en vuxen.`
+        explanation: `AI kan låta säker fast den har fel. Den kan också ha fördomar. Kolla viktiga saker på en sida du litar på eller fråga en vuxen.`
     },
     {
         question: "Någon lägger ut en bild på dig på nätet. Går det alltid att ta bort bilden helt?",
@@ -681,7 +681,7 @@ const questions = [
             "Ja, om personen som la ut den tar bort den."
         ],
         correct: 1,
-        explanation: `En bild kan sparas och delas vidare på några sekunder. Tänk efter innan du lägger ut en bild, och fråga alltid först om det är en bild på någon annan.
+        explanation: `En bild kan sparas och delas vidare på några sekunder. Tänk efter innan du lägger ut en bild, och fråga alltid först om du vill lägga ut en bild på någon annan.
         Om du blir ledsen över en bild, berätta för en vuxen.`
     },
     {
@@ -716,18 +716,7 @@ const questions = [
             "Jag lägger på och ringer kompisen på det vanliga numret."
         ],
         correct: 2,
-        explanation: `AI kan härma en röst. Bluffare har ofta bråttom och vill ha pengar snabbt. Lägg på och ring numret du redan har.`
-    },
-    {
-        question: "Du ser en annons med märkesskor för 299 kr. De kostar annars 5 000 kr. Det står: ”Bara i dag! Tre par kvar!” Vad kan det vara?",
-        image: "skor.jpg",
-        options: [
-            "Ett riktigt fynd. Jag måste skynda mig.",
-            "En bluff. Jag kollar butiken innan jag köper.",
-            "Ett fel i priset. Jag köper direkt."
-        ],
-        correct: 1,
-        explanation: `Ett jättelågt pris och bråttom är varningstecken. Sök på butikens namn och läs vad andra säger, till exempel på se.trustpilot.com. Fråga en vuxen innan du betalar.`
+        explanation: `Idag kan AI härma en röst. Bluffare har ofta bråttom och vill ha pengar snabbt. Lägg på och ring numret du redan har.`
     },
     {
         question: "Du ser en bild på en haj på en översvämmad gata. Hur kollar du om den är äkta?",
