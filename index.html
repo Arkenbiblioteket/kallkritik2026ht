@@ -767,7 +767,7 @@ button { font-family: inherit; }
         </div>
 
         <button class="main-button" onclick="showPersonPage()">Jämför äkta och AI-bilder</button>
-        <button class="secondary-button" onclick="showResultPage()">Tillbaka till resultatet</button>
+        <button class="secondary-button" onclick="showResultPage()">Se mitt resultat</button>
     </section>
 
     <section id="personScreen" class="hidden">
@@ -1178,7 +1178,7 @@ function answer(selectedIndex) {
 
     document.getElementById("nextButton").textContent =
         currentQuestion === questions.length - 1
-            ? "Se resultatet →"
+            ? "Till övningarna →"
             : "Nästa fråga →";
 
     feedback.classList.remove("hidden");
@@ -1194,7 +1194,7 @@ function nextQuestion() {
         currentQuestion++;
         showQuestion();
     } else {
-        showResultPage();
+        showPracticePage();
     }
 }
 
