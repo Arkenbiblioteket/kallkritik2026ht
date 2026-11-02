@@ -121,7 +121,9 @@ button { font-family: inherit; }
 .main-button:focus-visible,
 .next-button:focus-visible,
 .secondary-button:focus-visible,
-.answer-button:focus-visible {
+.answer-button:focus-visible,
+.practice-link:focus-visible,
+.practice-card summary:focus-visible {
     outline: 4px solid #f1c644;
     outline-offset: 3px;
 }
@@ -343,6 +345,93 @@ button { font-family: inherit; }
     margin: 18px 0;
 }
 
+/* ---------- Övningssida (efter quizet) ---------- */
+
+.practice-card {
+    text-align: left;
+    background: #f2f7fb;
+    border: 2px solid #d1e0ea;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 18px auto;
+    max-width: 900px;
+}
+
+.practice-card h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.practice-card h3 {
+    color: #174d75;
+    margin: 16px 0 6px;
+    font-size: 1.1rem;
+}
+
+.practice-card p,
+.practice-card li {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.practice-card ol,
+.practice-card ul {
+    margin: 6px 0 10px;
+    padding-left: 26px;
+}
+
+.practice-card li { margin-bottom: 6px; }
+
+.practice-link {
+    display: inline-block;
+    margin: 8px 8px 8px 0;
+    padding: 12px 20px;
+    background: #176a9b;
+    color: #ffffff;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 0 #104c70;
+}
+
+.practice-link:hover { background: #135c85; }
+
+.practice-link.light {
+    background: #e7f2fa;
+    color: #174d75;
+    border: 2px solid #b6d5e9;
+    box-shadow: none;
+    padding: 10px 18px;
+}
+
+.practice-link.light:hover { background: #d5e9f6; }
+
+.practice-card details {
+    margin-top: 14px;
+    background: #fff7d6;
+    border: 2px solid #e5bd45;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.practice-card summary {
+    cursor: pointer;
+    font-weight: 800;
+    color: #725400;
+    font-size: 1.08rem;
+}
+
+.practice-card details[open] summary { margin-bottom: 8px; }
+
+.practice-tip {
+    background: #d9f5e5;
+    border-left: 6px solid #258653;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 12px 0 4px;
+    color: #164d30;
+}
+
 /* ---------- Jämförelse av bildpar ---------- */
 
 .person-name {
@@ -471,6 +560,13 @@ button { font-family: inherit; }
         max-width: 140px;
         max-height: 60px;
     }
+
+    .practice-card { max-width: 1100px; }
+    .practice-card p,
+    .practice-card li { font-size: 1.3rem; }
+    .practice-card h3 { font-size: 1.4rem; }
+    .practice-card summary { font-size: 1.3rem; }
+    .practice-link { font-size: 1.2rem; padding: 14px 26px; }
 }
 
 @media (max-width: 620px) {
@@ -507,6 +603,14 @@ button { font-family: inherit; }
     .secondary-button {
         width: 100%;
         margin: 7px 0;
+    }
+
+    .practice-card { padding: 16px; }
+
+    .practice-link {
+        display: block;
+        text-align: center;
+        margin: 8px 0;
     }
 
     /* Bilderna ska fortfarande synas bredvid varandra på mobil */
@@ -576,9 +680,94 @@ button { font-family: inherit; }
         <div id="resultMessage" class="result-panel"></div>
         <h2>Vill du fortsätta träna?</h2>
         <p>Här kan du testa fler saker och fundera vidare över vad som är sant på nätet.</p>
+        <button class="main-button" onclick="showPracticePage()">Öva: Trustpilot och bildsökning</button>
         <button class="main-button" onclick="showPersonPage()">Jämför äkta och AI-bilder</button>
         <button class="secondary-button" onclick="showQuizPage()">Testa SVT:s AI-quiz</button>
         <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
+    </section>
+
+    <!-- ===== NY SIDA: Övningar efter quizet ===== -->
+    <section id="practiceScreen" class="hidden">
+        <h1>🔎 Nu övar vi som riktiga detektiver!</h1>
+        <p>Det är en sak att veta hur man kollar. Nu får du prova själv. Öppna länkarna i en ny flik och följ stegen.</p>
+
+        <div class="practice-card">
+            <h2>⭐ Uppgift 1: Kolla ett företag på Trustpilot</h2>
+            <p>Trustpilot är en sida där kunder skriver omdömen om företag och webbutiker. Den är bra att använda <strong>innan</strong> du handlar av en butik du inte känner till.</p>
+            <a class="practice-link" href="https://se.trustpilot.com/" target="_blank" rel="noopener noreferrer">Öppna Trustpilot</a>
+
+            <h3>Så gör du</h3>
+            <ol>
+                <li>Gå till Trustpilot och skriv webbutikens namn eller adress i sökrutan. Prova med en butik du redan känner till, till exempel en som din familj handlat av.</li>
+                <li>Titta på <strong>betyget</strong> (1–5 stjärnor) och på <strong>hur många omdömen</strong> det bygger på.</li>
+                <li>Läs några omdömen, både de bra och de dåliga. Läs särskilt de med 1–2 stjärnor.</li>
+                <li>Kolla <strong>när</strong> omdömena skrevs. Är de skrivna samma dag eller låter de nästan likadant? Då kan något vara fel.</li>
+                <li>Se om företaget har svarat på kritiken. Det kan visa hur de behandlar sina kunder.</li>
+            </ol>
+
+            <details>
+                <summary>🤔 Vad visar resultatet egentligen? (klicka här)</summary>
+                <p>Betyget är bara en <strong>sammanfattning av vad några kunder har tyckt</strong>. Det är inget bevis för att företaget är bra eller dåligt.</p>
+                <ul>
+                    <li>Det är bara de som <strong>väljer att skriva</strong> som syns. Ofta är det de som är mycket nöjda eller mycket arga.</li>
+                    <li>Omdömen kan vara <strong>falska</strong>. Vissa företag köper bra omdömen, och andra kan skriva elaka omdömen om konkurrenter.</li>
+                    <li>Få omdömen betyder inte att butiken är en bluff, men det betyder att du inte vet så mycket än. Var extra försiktig.</li>
+                    <li>Ett högt betyg med bara ett fåtal omdömen är mindre trovärdigt än ett bra betyg med många omdömen som spridits över lång tid.</li>
+                    <li>Finns företaget inte alls på Trustpilot? Då behöver du kolla på andra sätt.</li>
+                </ul>
+            </details>
+
+            <p class="practice-tip"><strong>Tips:</strong> Googla också på butikens namn + ordet <em>bluff</em> eller <em>lurad</em>. Använd flera källor, inte bara en. Fråga en vuxen om du är osäker innan du handlar eller betalar.</p>
+        </div>
+
+        <div class="practice-card">
+            <h2>🖼️ Uppgift 2: Gör en omvänd bildsökning</h2>
+            <p>Vanligtvis söker du med ord och får bilder. Vid <strong>omvänd bildsökning</strong> är det tvärtom: du söker med en <strong>bild</strong> och får veta var den finns på nätet.</p>
+            <a class="practice-link" href="https://images.google.com/" target="_blank" rel="noopener noreferrer">Google Bilder (Lens)</a>
+            <a class="practice-link light" href="https://tineye.com/" target="_blank" rel="noopener noreferrer">TinEye</a>
+
+            <h3>Så gör du på dator</h3>
+            <ol>
+                <li>Hitta en bild du vill kolla, till exempel hajbilden från fråga 7 eller en bild från sociala medier.</li>
+                <li>Gå till Google Bilder och klicka på <strong>kameraikonen</strong> i sökrutan (Google Lens).</li>
+                <li>Ladda upp bilden, eller klistra in bildens webbadress.</li>
+                <li>Titta på resultaten: Var har bilden funnits förut? Vilken är den äldsta träffen? Vad står det där?</li>
+            </ol>
+
+            <h3>Så gör du på mobil</h3>
+            <ol>
+                <li>Håll fingret på bilden i webbläsaren, eller ta en skärmdump.</li>
+                <li>Välj <strong>Sök med Google Lens</strong> om alternativet finns, eller öppna Google-appen och tryck på kameraikonen.</li>
+                <li>Välj bilden och läs resultaten.</li>
+            </ol>
+
+            <details>
+                <summary>🤔 Vad betyder resultatet? (klicka här)</summary>
+                <ul>
+                    <li>Hittar du bilden i en <strong>äldre artikel eller från en annan händelse</strong> än den som påstås? Då används den troligen på fel sätt.</li>
+                    <li>Hittar du ett inlägg där någon förklarar att bilden är falsk eller ändrad (till exempel av SVT, SR, DN eller en faktagranskare)? Bra, då vet du mer.</li>
+                    <li>Hittar du <strong>ingenting</strong>? Det bevisar inte att bilden är äkta. Nya bilder och AI-bilder har ofta inga träffar.</li>
+                    <li>Hittar du massor av träffar? Det bevisar inte heller att bilden är sann. Den kan ha delats många gånger fast den är falsk.</li>
+                </ul>
+                <p>En bildsökning visar alltså <strong>var bilden kommer ifrån och var den har använts</strong>, men den säger inte ensam om bilden är äkta. Använd den tillsammans med andra sätt att kolla.</p>
+            </details>
+        </div>
+
+        <div class="practice-card">
+            <h2>🧰 Fler saker att träna på</h2>
+            <p>Det här kom upp i quizfrågorna. Prova själv:</p>
+            <ul>
+                <li><strong>Annonser i Google (fråga 1):</strong> Sök på något som <em>köpa billiga skor</em>. Vilka träffar har ordet <em>Annons</em> eller <em>Sponsrad</em> bredvid sig? Hoppa över dem när du vill ha ett neutralt svar.</li>
+                <li><strong>Hitta en bok på riktigt (fråga 8):</strong> Fråga en AI efter en bok och sök sedan efter den i bibliotekens katalog. Finns den?
+                    <br><a class="practice-link light" href="https://libris.kb.se/" target="_blank" rel="noopener noreferrer">Sök i Libris</a></li>
+                <li><strong>Jämför nyhetskällor (fråga 4):</strong> Välj en nyhet och se om flera nyhetssajter skriver samma sak.
+                    <br><button class="secondary-button" onclick="openNews('practiceScreen')">Visa nyhetskällor</button></li>
+                <li><strong>Bluffsamtal och Swish (fråga 5 och 6):</strong> Bestäm tillsammans med din familj ett <strong>hemligt kodord</strong>. Om någon ringer och ber om pengar kan ni fråga efter kodordet, och lägga på och ringa upp på numret ni redan har.</li>
+            </ul>
+        </div>
+
+        <button class="main-button" onclick="showPersonPage()">Jämför äkta och AI-bilder</button>
+        <button class="secondary-button" onclick="showResultPage()">Tillbaka till resultatet</button>
     </section>
 
     <section id="personScreen" class="hidden">
@@ -639,7 +828,7 @@ button { font-family: inherit; }
             </a>
         </div>
         <p class="small-note">Tänk på att även etablerade källor kan behöva kompletteras med mer information.</p>
-        <button class="main-button" onclick="returnToQuestion()">Tillbaka till frågan</button>
+        <button id="newsBackButton" class="main-button" onclick="returnToQuestion()">Tillbaka till frågan</button>
     </section>
 
 </div>
@@ -778,6 +967,7 @@ const screenIds = [
     "introScreen",
     "gameScreen",
     "resultScreen",
+    "practiceScreen",
     "personScreen",
     "quizLinkScreen",
     "newsScreen"
@@ -982,7 +1172,7 @@ function answer(selectedIndex) {
         const newsButton = document.createElement("button");
         newsButton.className = "secondary-button";
         newsButton.textContent = "Visa nyhetskällor";
-        newsButton.addEventListener("click", openNews);
+        newsButton.addEventListener("click", () => openNews("gameScreen"));
         extraLinks.appendChild(newsButton);
     }
 
@@ -1019,13 +1209,14 @@ function showResultPage() {
 
     let message;
 
-    if (score >= 9) {
+    // Gränserna är anpassade till 8 frågor (max 8 poäng)
+    if (score >= 8) {
         message = "<h2>Fantastiskt detektivarbete!</h2>" +
             "<p>Du verkar vara bra på att upptäcka varningssignaler. Fortsätt att vara nyfiken och kontrollera information.</p>";
-    } else if (score >= 7) {
+    } else if (score >= 6) {
         message = "<h2>Mycket bra jobbat!</h2>" +
             "<p>Du har många bra strategier för att upptäcka bluffar och falsk information. Fortsätt öva på att kontrollera källor.</p>";
-    } else if (score >= 5) {
+    } else if (score >= 4) {
         message = "<h2>Bra jobbat!</h2>" +
             "<p>Du har redan flera användbara kunskaper. Kom ihåg att stanna upp och kontrollera när något verkar för bra eller brådskande för att vara sant.</p>";
     } else {
@@ -1044,13 +1235,25 @@ function restartQuiz() {
     showScreen("startScreen");
 }
 
-function openNews() {
-    previousScreen = "gameScreen";
+function openNews(fromScreen) {
+    previousScreen = fromScreen || "gameScreen";
+
+    document.getElementById("newsBackButton").textContent =
+        previousScreen === "practiceScreen"
+            ? "Tillbaka till övningarna"
+            : "Tillbaka till frågan";
+
     showScreen("newsScreen");
 }
 
 function returnToQuestion() {
     showScreen(previousScreen);
+}
+
+/* ---------- Övningssida ---------- */
+
+function showPracticePage() {
+    showScreen("practiceScreen");
 }
 
 /* ---------- Bildjämförelse ---------- */
