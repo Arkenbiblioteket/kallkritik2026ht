@@ -689,6 +689,11 @@ button { font-family: inherit; }
     <!-- ===== NY SIDA: Övningar efter quizet ===== -->
     <section id="practiceScreen" class="hidden">
         <h1>🔎 Nu övar vi som riktiga detektiver!</h1>
+
+        <h2>Ditt resultat från quizet</h2>
+        <div id="practiceScore" class="result-score"></div>
+        <div id="practiceMessage" class="result-panel"></div>
+
         <p>Det är en sak att veta hur man kollar. Nu får du prova själv. Öppna länkarna i en ny flik och följ stegen.</p>
 
         <div class="practice-card">
@@ -1198,13 +1203,11 @@ function nextQuestion() {
     }
 }
 
-function showResultPage() {
-    showScreen("resultScreen");
-
+function renderResult(scoreId, messageId) {
     const total = questions.length;
     const percentage = Math.round((score / total) * 100);
 
-    document.getElementById("resultScore").textContent =
+    document.getElementById(scoreId).textContent =
         score + " av " + total + " poäng (" + percentage + " %)";
 
     let message;
@@ -1224,7 +1227,12 @@ function showResultPage() {
             "<p>Nu har du fått tips om vad du kan vara uppmärksam på. Det viktigaste är att våga stanna upp, kontrollera och fråga någon om hjälp när något känns osäkert.</p>";
     }
 
-    document.getElementById("resultMessage").innerHTML = message;
+    document.getElementById(messageId).innerHTML = message;
+}
+
+function showResultPage() {
+    showScreen("resultScreen");
+    renderResult("resultScore", "resultMessage");
     document.getElementById("progressFill").style.width = "100%";
 }
 
@@ -1253,6 +1261,7 @@ function returnToQuestion() {
 /* ---------- Övningssida ---------- */
 
 function showPracticePage() {
+    renderResult("practiceScore", "practiceMessage");
     showScreen("practiceScreen");
 }
 
