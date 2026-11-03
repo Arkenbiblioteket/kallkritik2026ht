@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tänk ett varv till – v3</title>
+<title>Tänk ett varv till – v5</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -588,13 +588,13 @@ a.secondary-button {
     <section id="startScreen">
         <h1>🕵️ Tänk ett varv till</h1>
         <h2>Ett spel om källkritik, AI och bluffar på nätet.</h2>
-        <img class="screen-image" src="start.jpg" alt="Sanningsdetektiven">
+        <img class="screen-image" src="start.jpg" alt="Sanningsdetektiven" onerror="this.style.display='none'">
         <button class="main-button" onclick="showIntroduction()">Starta spelet</button>
     </section>
 
     <section id="introScreen" class="hidden">
         <h1>Välkommen till Tänk ett varv till!</h1>
-        <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet">
+        <img class="screen-image" src="luras.jpg" alt="Tänk efter innan du litar på något på nätet" onerror="this.style.display='none'">
         <p>Du får åtta frågor med tre svarsalternativ. Välj det svar du tycker är bäst.</p>
         <p>Efter varje svar får du veta om det var rätt och läsa en förklaring. Du får en poäng för varje rätt svar.</p>
         <p><strong>Lycka till – och tänk som en detektiv!</strong></p>
@@ -624,7 +624,7 @@ a.secondary-button {
 
     <section id="resultScreen" class="hidden">
         <h1>🎉 Du har klarat quizet!</h1>
-        <img class="screen-image" src="glad.jpg" alt="Bra jobbat">
+        <img class="screen-image" src="glad.jpg" alt="Bra jobbat" onerror="this.style.display='none'">
         <div id="resultStars" class="result-stars" aria-hidden="true"></div>
         <div id="resultScore" class="result-score"></div>
         <div id="resultMessage" class="result-panel"></div>
@@ -741,7 +741,7 @@ a.secondary-button {
 const questions = [
     {
         question: "Du söker på Google. Vad stämmer bäst?",
-        image: "googlesok.jpg",
+        image: "google.jpg",
         bigImage: true,
         options: [
             "Det första svaret är alltid rätt.",
@@ -782,8 +782,7 @@ const questions = [
             "Jag kollar om flera sidor jag litar på skriver samma sak."
         ],
         correct: 2,
-        explanation: `Falska nyheter sprids snabbt. Kolla om till exempel SVT, SR eller DN skriver samma sak innan du tror på den eller delar den.`,
-        newsLinks: true
+        explanation: `Falska nyheter sprids snabbt. Kolla om till exempel SVT, SR eller DN skriver samma sak innan du tror på den eller delar den.`
     },
     {
         question: "Du säljer en jacka på Vinted. Köparen säger att hen har swishat för mycket och ber dig swisha tillbaka. Vad gör du?",
@@ -811,8 +810,10 @@ const questions = [
         question: "Du ser en bild på en haj på en översvämmad gata. Hur kollar du om den är äkta?",
 
         image: `
+            <div style="display: flex; gap: 10px;">
                 <img src="haj.jpg" alt="Haj 1" style="width: 50%; height: auto;">
-              </div>
+                <img src="haj2.jpg" alt="Haj 2" style="width: 50%; height: auto;">
+            </div>
         `,
 
         options: [
