@@ -706,6 +706,30 @@ a.secondary-button {
         <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
     </section>
 
+    <section id="newsScreen" class="hidden">
+        <h1>Jämför flera nyhetskällor</h1>
+        <p>Om du undrar om en nyhet stämmer kan du undersöka vad flera etablerade nyhetskällor skriver.</p>
+        <div class="link-list">
+            <a class="news-link" href="https://www.svt.se/" target="_blank" rel="noopener noreferrer">
+                <img src="svt.jpg" alt="SVT">
+            </a>
+            <a class="news-link" href="https://sverigesradio.se/" target="_blank" rel="noopener noreferrer">
+                <img src="sr.jpg" alt="Sveriges Radio">
+            </a>
+            <a class="news-link" href="https://www.dn.se/" target="_blank" rel="noopener noreferrer">
+                <img src="dn.jpg" alt="Dagens Nyheter">
+            </a>
+            <a class="news-link" href="https://www.bbc.com/news" target="_blank" rel="noopener noreferrer">
+                <img src="bbc.jpg" alt="BBC News">
+            </a>
+            <a class="news-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
+                <img src="google.jpg" alt="Google">
+            </a>
+        </div>
+        <p class="small-note">Tänk på att även etablerade källor kan behöva kompletteras med mer information.</p>
+        <button id="newsBackButton" class="main-button" onclick="returnToQuestion()">Tillbaka till frågan</button>
+    </section>
+
 </div>
 
 <canvas id="fireworks" aria-hidden="true"></canvas>
