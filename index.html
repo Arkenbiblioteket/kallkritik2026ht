@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tänk ett varv till – v2</title>
+<title>Tänk ett varv till – v3</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -566,39 +566,6 @@ a.secondary-button {
     font-size: 1.3rem;
 }
 
-/* ---------- Videoklipp ---------- */
-
-.video-box {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: 16px auto;
-    aspect-ratio: 16 / 9;
-    background: #10212f;
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.video-box iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.video-missing {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    color: #ffffff;
-    font-size: 1.2rem;
-    line-height: 1.5;
-}
-
 @media (min-width: 1200px) {
     .step-text { font-size: 1.5rem; }
     .step-num { width: 54px; height: 54px; font-size: 1.7rem; }
@@ -724,15 +691,17 @@ a.secondary-button {
             </div>
         </div>
 
-        <button class="main-button" onclick="showVideoPage()">Sista uppgiften: äkta eller AI? →</button>
+        <button class="main-button" onclick="showGuessPage()">Sista uppgiften: äkta eller AI? →</button>
         <button class="secondary-button" onclick="backToResult()">Tillbaka till resultatet</button>
     </section>
 
-    <section id="videoScreen" class="hidden">
+    <section id="guessScreen" class="hidden">
         <h1>🕵️ Äkta eller AI?</h1>
-        <p>Titta på bilderna. Gissa: är bilden äkta eller gjord av AI?</p>
-        <div id="videoBox" class="video-box"></div>
-        <p id="videoFallback" class="small-note"></p>
+        <p>Nu ska du själv gissa. Du får se videoklipp. Är de äkta, eller gjorda av AI?</p>
+        <img class="screen-image" src="quiz1.jpg" alt="SVT:s quiz om AI-videor" onerror="this.style.display='none'">
+        <a class="main-button" href="https://www.svt.se/special/kan-du-skilja-pa-en-ai-video-och-en-riktig/"
+           target="_blank" rel="noopener noreferrer">Starta SVT:s quiz</a>
+        <p class="small-note">Quizet öppnas i en ny flik. Stäng fliken när ni är klara, så kommer ni tillbaka hit.</p>
         <button class="secondary-button" onclick="showPracticePage()">← Tillbaka till övningarna</button>
         <button class="secondary-button" onclick="restartQuiz()">Spela igen</button>
     </section>
@@ -882,12 +851,11 @@ const screenIds = [
     "gameScreen",
     "resultScreen",
     "practiceScreen",
-    "videoScreen",
+    "guessScreen",
     "newsScreen"
 ];
 
 function showScreen(screenId) {
-    stopVideo();
     if (screenId !== "resultScreen") stopFireworks();
 
     screenIds.forEach(id => {
@@ -1184,64 +1152,10 @@ function showPracticePage() {
     showScreen("practiceScreen");
 }
 
-/* ---------- Videoklipp (YouTube) ----------
-   Fyll i klippets ID (det som står efter v= i webbadressen).
-   start och slut kan skrivas som "1:15" eller som sekunder (75).
-   Lämna slut tomt ("") för att spela till klippets slut.
-*/
-const VIDEO = {
-    id: "KLIPP_ID",
-    start: "0:00",
-    end: ""
-};
+/* ---------- Sista uppgiften: SVT:s quiz (öppnas i ny flik) ---------- */
 
-function toSeconds(value) {
-    if (typeof value === "number") return value;
-    if (!value) return 0;
-
-    const parts = String(value).split(":").map(Number);
-    if (parts.some(isNaN)) return 0;
-
-    return parts.reduce((total, n) => total * 60 + n, 0);
-}
-
-function showVideoPage() {
-    showScreen("videoScreen");
-
-    const box = document.getElementById("videoBox");
-    const fallback = document.getElementById("videoFallback");
-    box.innerHTML = "";
-    fallback.innerHTML = "";
-
-    if (!VIDEO.id || VIDEO.id === "KLIPP_ID") {
-        box.innerHTML = '<div class="video-missing">Här visas videoklippet. Lägg in klippets ID i koden (VIDEO.id).</div>';
-        return;
-    }
-
-    const start = toSeconds(VIDEO.start);
-    const end = toSeconds(VIDEO.end);
-
-    let url = "https://www.youtube.com/embed/" + encodeURIComponent(VIDEO.id) +
-        "?rel=0&playsinline=1&start=" + start;
-    if (end > start) url += "&end=" + end;
-
-    const frame = document.createElement("iframe");
-    frame.src = url;
-    frame.title = "Äkta eller AI? Videoklipp";
-    frame.allow = "accelerometer; encrypted-media; picture-in-picture; fullscreen";
-    frame.allowFullscreen = true;
-    frame.referrerPolicy = "strict-origin-when-cross-origin";
-    box.appendChild(frame);
-
-    // Reserv om inbäddningen inte fungerar (t.ex. när filen öppnas direkt från datorn)
-    fallback.innerHTML = 'Fungerar inte klippet? <a href="https://youtu.be/' +
-        encodeURIComponent(VIDEO.id) + "?t=" + start +
-        '" target="_blank" rel="noopener noreferrer">Öppna det på YouTube</a>.';
-}
-
-function stopVideo() {
-    const box = document.getElementById("videoBox");
-    if (box) box.innerHTML = "";
+function showGuessPage() {
+    showScreen("guessScreen");
 }
 
 /* ---------- Fyrverkeri ---------- */
