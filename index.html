@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tänk ett varv till – v5</title>
+<title>Tänk ett varv till – v6</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -279,15 +279,6 @@ a.secondary-button:focus-visible {
 .feedback-result.correct-text { color: #187344; }
 .feedback-result.incorrect-text { color: #b02c2c; }
 
-.feedback-image {
-    display: block;
-    width: 100%;
-    max-width: 180px;
-    max-height: 150px;
-    object-fit: contain;
-    margin: 12px auto;
-}
-
 .score-line {
     font-weight: 700;
     color: #174d75;
@@ -404,12 +395,7 @@ a.secondary-button:focus-visible {
 
     .question-image-group { max-width: 1200px; }
 
-    .feedback-image {
-        max-width: 240px;
-        max-height: 200px;
-    }
-
-    .link-list { max-width: 900px; }
+        .link-list { max-width: 900px; }
     .news-link { min-height: 100px; }
     .news-link img {
         max-width: 140px;
@@ -579,6 +565,25 @@ a.secondary-button {
     .steps,
     .rule-chips { grid-template-columns: 1fr; }
 }
+
+.feedback-emoji {
+    font-size: 3.4rem;
+    line-height: 1.1;
+    margin: 8px 0;
+}
+
+.result-emoji {
+    font-size: 6rem;
+    line-height: 1.1;
+    margin: 10px 0;
+}
+
+.feedback-result.incorrect-text { color: #a85f00; }
+
+@media (min-width: 1200px) {
+    .feedback-emoji { font-size: 4.4rem; }
+    .result-emoji { font-size: 8rem; }
+}
 </style>
 </head>
 
@@ -615,7 +620,7 @@ a.secondary-button {
 
         <div id="feedback" class="feedback hidden" aria-live="polite">
             <div id="feedbackResult" class="feedback-result"></div>
-            <img id="feedbackImage" class="feedback-image" src="glad.jpg" alt="">
+            <div id="feedbackEmoji" class="feedback-emoji" aria-hidden="true"></div>
             <div id="feedbackExplanation" class="feedback-explanation"></div>
             <div id="extraLinks"></div>
             <button id="nextButton" class="next-button" onclick="nextQuestion()">Nästa fråga →</button>
@@ -624,7 +629,7 @@ a.secondary-button {
 
     <section id="resultScreen" class="hidden">
         <h1>🎉 Du har klarat quizet!</h1>
-        <img class="screen-image" src="glad.jpg" alt="Bra jobbat" onerror="this.style.display='none'">
+        <div id="resultEmoji" class="result-emoji" aria-hidden="true">🎉</div>
         <div id="resultStars" class="result-stars" aria-hidden="true"></div>
         <div id="resultScore" class="result-score"></div>
         <div id="resultMessage" class="result-panel"></div>
@@ -741,7 +746,7 @@ a.secondary-button {
 const questions = [
     {
         question: "Du söker på Google. Vad stämmer bäst?",
-        image: "google.jpg",
+        image: "googlesok.jpg",
         bigImage: true,
         options: [
             "Det första svaret är alltid rätt.",
@@ -838,6 +843,9 @@ const questions = [
         explanation: `Falska webbutiker kan se professionella ut men skickar aldrig något. Ett pris som är alldeles för lågt är en varningssignal. Kolla omdömen och fråga en vuxen innan du betalar.`
     }
 ];
+
+// Sätt PLAY_BOO till true om buande ska spelas (bu.wav) efter fel svar
+const PLAY_BOO = false;
 
 let currentQuestion = 0;
 let score = 0;
@@ -971,7 +979,7 @@ function answer(selectedIndex) {
         score++;
         playSound("applauseSound");
     } else {
-        playSound("booSound");
+        if (PLAY_BOO) playSound("booSound");
     }
 
     const buttons = document.querySelectorAll(".answer-button");
@@ -996,21 +1004,17 @@ function answer(selectedIndex) {
 
     const feedback = document.getElementById("feedback");
     const result = document.getElementById("feedbackResult");
-    const feedbackImage = document.getElementById("feedbackImage");
+    const feedbackEmoji = document.getElementById("feedbackEmoji");
     const explanation = document.getElementById("feedbackExplanation");
 
-    result.textContent = isCorrect ? "✓ Rätt svar!" : "✗ Inte riktigt!";
+    result.textContent = isCorrect ? "✓ Rätt svar!" : "Nästan! Tänk ett varv till.";
     result.className = "feedback-result " +
         (isCorrect ? "correct-text" : "incorrect-text");
 
-    feedbackImage.src = isCorrect ? "glad.jpg" : "oops.jpg";
-    feedbackImage.alt = isCorrect ? "Glad reaktion" : "Oj, inte riktigt";
-
-    feedbackImage.onerror = function () {
-        this.style.display = "none";
-    };
-
-    feedbackImage.style.display = "block";
+    const happy = ["🎉", "👏", "⭐", "🏆", "👍"];
+    feedbackEmoji.textContent = isCorrect
+        ? happy[Math.floor(Math.random() * happy.length)]
+        : "🤔";
 
     explanation.innerHTML = "";
 
@@ -1114,6 +1118,7 @@ function showResultPage() {
     }
 
     document.getElementById("resultMessage").innerHTML = message;
+    document.getElementById("resultEmoji").textContent = score >= 6 ? "🏆" : "🎉";
 
     playSound("applauseSound");
     startFireworks(score);
